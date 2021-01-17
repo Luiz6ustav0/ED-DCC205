@@ -1,6 +1,6 @@
 CC=clang++
 CFLAGS=-fsanitize=address,undefined -O1 -fno-omit-frame-pointer \
-		-g -Wall -Wshadow -std=c++17 \
+		-g -Wall -Wshadow -std=c++14 \
 		-Wno-unused-result -Wno-sign-compare -Wno-char-subscripts
 TARGET=main.out
 
@@ -8,9 +8,8 @@ BUILD_DIR = ./build
 SRC_DIR = ./src
 INCLUDE_DIR = ./include
 TEST_DIR = ./test
-TEST_FILE =
+TEST_FILE = test.cpp
 
-all: run
 
 ${BUILD_DIR}/${TARGET}: 
 	@${CC} ${CFLAGS} -o ${BUILD_DIR}/${TARGET} ${SRC_DIR}/*.cpp
@@ -21,8 +20,11 @@ ${BUILD_DIR}/main.o: ${SRC_DIR}/main.cpp
 run: ${BUILD_DIR}/${TARGET}
 	@$^
 
-${TEST_DIR}/test.out : ${BUILD_DIR}/Vendedor.o ${BUILD_DIR}/Engenheiro.o ${BUILD_DIR}/Empregado.o
-	@${CC} ${CFLAGS} -I ${INCLUDE_DIR}/Empregado/ -c ${TEST_DIR}/${TEST_FILE} -o ${TEST_DIR}/BasicTests.o
+${BUILD_DIR}/Stack.o: ${SRC_DIR}/Stack.cpp
+	@${CC} ${CFLAGS} -I ${INCLUDE_DIR} -c ${SRC_DIR}/Stack.cpp -o ${BUILD_DIR}/main.o
+
+${TEST_DIR}/test.out : ${BUILD_DIR}/Stack.o
+	@${CC} ${CFLAGS} -I ${INCLUDE_DIR} -c ${TEST_DIR}/${TEST_FILE} -o ${TEST_DIR}/BasicTests.o
 	@${CC} ${CFLAGS} ${BUILD_DIR}/*.o ${TEST_DIR}/*.o -o ${TEST_DIR}/test.out
 
 test: ${TEST_DIR}/test.out
