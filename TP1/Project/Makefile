@@ -21,7 +21,9 @@
 
 # cc and flags
 CC = g++
-CXXFLAGS = -std=c++11 -g -Wall
+CXXFLAGS =-fsanitize=address,undefined -O1 -fno-omit-frame-pointer \
+		-g -Wall -Wshadow -std=c++14 \
+		-Wno-unused-result -Wno-sign-compare -Wno-char-subscripts
 #CXXFLAGS = -std=c++11 -O3 -Wall
 
 # folders
@@ -29,6 +31,8 @@ INCLUDE_FOLDER = ./include/
 BIN_FOLDER = ./bin/
 OBJ_FOLDER = ./obj/
 SRC_FOLDER = ./src/
+TEST_DIR = ./test/
+TEST_FILE = tests.cpp
 
 # all sources, objs, and header files
 MAIN = Main
@@ -43,4 +47,35 @@ all: $(OBJ)
 	$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET) $(OBJ)
 
 clean:
-	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)*
+	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)* ${TEST_DIR}/*.out ${TEST_DIR}/*.o
+
+${TEST_DIR}/test.out : $(OBJ)
+	@${CC} ${CFLAGS} -I ${INCLUDE_FOLDER} -c ${TEST_DIR}${TEST_FILE} -o ${TEST_DIR}/BasicTests.o
+	@${CC} ${CFLAGS} ${BUILD_DIR}/*.o ${TEST_DIR}/*.o -o ${TEST_DIR}/runTests
+
+test: ${TEST_DIR}/test.out
+	@clean	
+	@$^
+	@echo "If you want to remove the files built for testing, you just need to 'make clean'"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
