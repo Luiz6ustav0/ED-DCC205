@@ -1,22 +1,31 @@
-#include "Queue.hpp"
+#ifndef Q_ARR
+#define Q_ARR
 
+#include <string>
 #define MAXSIZE 100
 
-template<class T>
-class QueueArrangement : Queue <T> {
+        
+class QueueArrangement {
 
     private:
+        int size;
         int front;
         int back;
-        T itens[MAXSIZE];
+        std::string itens[MAXSIZE];
 
     public:
         QueueArrangement();
-        // int getFront() const;
-        // int getBack() const;
 
-        void insert(T x);
-        T dequeue();
+        void insert(std::string x);
+        std::string dequeue();
         void clean();
 
+        // getters
+        int getSize() const;
+        bool isEmpty() const;
+        int getFront() const;
+        int getBack() const;
+
 };
+
+#endif
