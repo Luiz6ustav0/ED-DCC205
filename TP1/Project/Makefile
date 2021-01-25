@@ -49,14 +49,8 @@ all: $(OBJ)
 clean:
 	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)* ${TEST_DIR}/*.out ${TEST_DIR}/*.o
 
-${TEST_DIR}/test.out : $(OBJ)
-	@${CC} ${CFLAGS} -I ${INCLUDE_FOLDER} -c ${TEST_DIR}${TEST_FILE} -o ${TEST_DIR}/BasicTests.o
-	@${CC} ${CFLAGS} ${BUILD_DIR}/*.o ${TEST_DIR}/*.o -o ${TEST_DIR}/runTests
-
-test: ${TEST_DIR}/test.out
-	@clean	
-	@$^
-	@echo "If you want to remove the files built for testing, you just need to 'make clean'"
+run:
+	@./bin/run.out
 
 
 
