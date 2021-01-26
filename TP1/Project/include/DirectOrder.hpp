@@ -8,15 +8,15 @@ class DirectOrder : Command {
 
     private:
         std::string command;
-        int robot, x, y;
+        Command* next;
+        int robot;
 
     public:
-        DirectOrder(std::string order, int bot, int posX=0, int posY=0);
+        DirectOrder(std::string order, int bot);
 
         std::string getOrder() const;
         int getRobot() const;
-        int getPosX() const;
-        int getPosY() const;
+        void setNext(Command* i);
 };
 
 #endif

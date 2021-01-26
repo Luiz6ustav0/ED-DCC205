@@ -7,11 +7,14 @@ class Command {
 
     private:
         std::string command;
+        Command* next;
 
     public:
         Command(std::string order) : command(order) {};
 
-        virtual std::string getOrder() const = 0;
+        void setNext(Command& a);
+        std::string getOrder() const;
+        int getRobot() const;
 };
 
 #endif

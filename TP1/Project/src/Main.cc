@@ -13,8 +13,8 @@ TEST_SUITE("Queue") {
   TEST_CASE("Queue::Queue()") {
     Queue q;
     CHECK(q.getSize() == 0);
-    CHECK(q.getBack() == 0);
-    CHECK(q.getFront() == 0);
+    CHECK(q.getBack() == nullptr);
+    CHECK(q.getFront() == nullptr);
   }
 
   // TEST_CASE("Complexo::operator/(Complexo)") {

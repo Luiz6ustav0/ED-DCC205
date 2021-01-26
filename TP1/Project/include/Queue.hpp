@@ -2,27 +2,28 @@
 #define Q_H
 
 #include <string>
+#include "Command.hpp"
         
 class Queue {
 
     private:
         int size;
-        int front;
-        int back;
+        Command* front;
+        Command* back;
 
     public:
         Queue();
         ~Queue();
 
-        void insert(std::string x);
-        std::string dequeue();
+        void insert(Command x);
+        Command dequeue();
         void clean();
 
         // getters
         int getSize() const;
         bool isEmpty() const;
-        int getFront() const;
-        int getBack() const;
+        Command* getFront() const;
+        Command* getBack() const;
 
 };
 
