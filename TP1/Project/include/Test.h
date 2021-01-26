@@ -4,15 +4,11 @@
 #include <stdio.h>
 
 class Test 
-{   private:
-        int successful;
-        int failure;
+{
     public:
         Test();
-        void TestQueue();
-        // ~Test();
+        ~Test();
         void Print();
-        bool assertInt(int a, int b);
 };
 
 #endif

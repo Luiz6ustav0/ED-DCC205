@@ -1,23 +1,13 @@
-#include "../include/Test.h"
-#include "../include/QueueArrangement.hpp"
-#include <iostream>
-#include <ostream>
+#include "Test.h"
 
-Test::Test() : successful(0), failure(0) {}
+Test::Test() {
+
+}
+
+Test::~Test() {
+
+}
 
 void Test::Print() {
-    std::cout << "Successful tests: " << this->successful << std::endl
-              << "Failed tests: " << this->failure << std::endl;
-}
-
-bool Test::assertInt(int a, int b) {
-    return a == b;
-}
-
-void Test::TestQueue() {
-    QueueArrangement q;
-    if (assertInt(q.getSize(), 0)) successful++;
-    else failure++;
-    if (assertInt(q.getFront(), q.getBack())) successful++;
-    else failure++;
+    printf("Test\n");
 }

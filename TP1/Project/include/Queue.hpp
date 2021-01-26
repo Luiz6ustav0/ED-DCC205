@@ -1,20 +1,18 @@
-#ifndef Q_ARR
-#define Q_ARR
+#ifndef Q_H
+#define Q_H
 
 #include <string>
-#define MAXSIZE 100
-
         
-class QueueArrangement {
+class Queue {
 
     private:
         int size;
         int front;
         int back;
-        std::string itens[MAXSIZE];
 
     public:
-        QueueArrangement();
+        Queue();
+        ~Queue();
 
         void insert(std::string x);
         std::string dequeue();
