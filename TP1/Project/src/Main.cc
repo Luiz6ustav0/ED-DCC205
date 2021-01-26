@@ -58,5 +58,4 @@ TEST_SUITE("Queue") {
     CHECK(q.getSize() == 0);
     CHECK(q.isEmpty() == true);
   }
-
 }
