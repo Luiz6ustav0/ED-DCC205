@@ -35,6 +35,8 @@ TEST_SUITE("Order nodes") {
     CHECK(ord1->getY() == -1);
     CHECK(ord2->getX() == 5);
     CHECK(ord2->getY() == 8);
+    CHECK(ord1->getOrder() == "COLETAR");
+    CHECK(ord2->getRobot() == 4);
 
     CHECK(ord1->getNext() == nullptr);
     CHECK(ord1->getNext() == ord2->getNext());
