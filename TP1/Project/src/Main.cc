@@ -56,6 +56,7 @@ TEST_SUITE("Queue") {
     CHECK(q.getFront() == nullptr);
     CHECK(q.getBack() == nullptr);
     CHECK(q.getSize() == 0);
+    CHECK(q.isEmpty() == true);
   }
 
 }

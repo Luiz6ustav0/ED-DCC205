@@ -33,6 +33,8 @@ template <class T> Queue<T>::~Queue() {
   if (this->back != nullptr) delete back;
 };
 
+template <class T> bool Queue<T>::isEmpty() const { return this->size <= 0 ? true : false; };
+
 template <class T> int Queue<T>::getSize() const { return this->size; };
 
 template <class T> T* Queue<T>::getFront() const { return this->front; }
