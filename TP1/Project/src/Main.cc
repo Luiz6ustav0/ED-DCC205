@@ -47,24 +47,15 @@ TEST_SUITE("Order nodes") {
     delete ord1;
     delete ord2;
   }
+}
 
-  // TEST_CASE("Inserting in a queue") {
-  //   Queue q;
-  //   CHECK(q.getSize() == 0);
-  //   q.insert(DirectOrder("Activate", 1));
-  //   // CHECK(q.getFront().getOrder() == "Activate");
-  //   // CHECK(q.getBack().getOrder() == );
-  // }
+TEST_SUITE("Queue") {
+  TEST_CASE("Instantiation") {
+    Queue<DirectOrder> q;
 
-  // TEST_CASE("Complexo::operator/(Complexo)") {
-  //   Complexo zero;
-  //   Complexo a(2, 3);
-  //   Complexo b(-2, -3);
-  //   Complexo c(0, 1);
-  //   CHECK(a / a ==  Complexo(1, 0));
-  //   CHECK(zero / a ==  Complexo(0, 0));
-  //   CHECK(a / b == Complexo(-1, 0));
-  //   CHECK(b / a == Complexo(-1, 0));
-  //   CHECK(c / c == Complexo(1, 0));
-  // }
+    CHECK(q.getFront() == nullptr);
+    CHECK(q.getBack() == nullptr);
+    CHECK(q.getSize() == 0);
+  }
+
 }
