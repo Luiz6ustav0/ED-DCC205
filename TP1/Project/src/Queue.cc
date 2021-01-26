@@ -1,13 +1,13 @@
 #include "../include/Queue.hpp"
-#include "../include/Command.hpp"
+#include "../include/Order.hpp"
 
 Queue::Queue() : size(0), front(nullptr), back(nullptr) {}
 
 Queue::~Queue() {}
 
-void Queue::insert(Command i) {
+void Queue::insert(Order i) {
     if (this->isEmpty()) {
-        this->front = new Command(i);
+        this->front = new Order(i);
         this->back = this->front;
         this->size++;
     } else {
@@ -16,8 +16,8 @@ void Queue::insert(Command i) {
 };
 
 
-Command Queue::dequeue() {
-    return Command("Test");
+Order* Queue::dequeue() {
+    return this->front;
 };
 
 
@@ -31,8 +31,8 @@ bool Queue::isEmpty() const {
 }
 
 // getters
-Command* Queue::getFront() const { return this->front; };
+Order Queue::getFront() const { return *(this->front); };
 
-Command* Queue::getBack() const { return this->back; };
+Order Queue::getBack() const { return *(this->back); };
 
 int Queue::getSize() const { return this->size; };

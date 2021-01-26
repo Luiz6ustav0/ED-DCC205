@@ -2,12 +2,14 @@
 
 
 DirectOrder::DirectOrder(std::string order, int bot)
-    : Command(order), robot(bot), next(nullptr) {};
+    : Command(order, bot), next(nullptr) {};
 
 
-void DirectOrder::setNext(Command* c) {
+void DirectOrder::setNext(DirectOrder* c) {
     this->next = c;
 }
 
-std::string DirectOrder::getOrder() const { return this->command; }
-int DirectOrder::getRobot() const { return this->robot; };
+DirectOrder* DirectOrder::getNext() { return this->next; };
+
+// std::string DirectOrder::getOrder() const { return this->command; }
+// int DirectOrder::getRobot() const { return this->robot; };

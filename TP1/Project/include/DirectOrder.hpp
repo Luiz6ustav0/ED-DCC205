@@ -2,21 +2,18 @@
 #define DIRECT_H
 
 #include <string>
-#include "Command.hpp"
+#include "Order.hpp"
         
-class DirectOrder : Command {
+class DirectOrder : public Order {
 
     private:
-        std::string command;
-        Command* next;
-        int robot;
+        DirectOrder* next;
 
     public:
         DirectOrder(std::string order, int bot);
 
-        std::string getOrder() const;
-        int getRobot() const;
-        void setNext(Command* i);
+        void setNext(DirectOrder* i);
+        DirectOrder* getNext();
 };
 
 #endif
