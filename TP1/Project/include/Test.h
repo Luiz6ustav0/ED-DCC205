@@ -3,12 +3,11 @@
 
 #include <stdio.h>
 
-class Test 
-{
-    public:
-        Test();
-        ~Test();
-        void Print();
+class Test {
+public:
+  Test();
+  ~Test();
+  void Print();
 };
 
 #endif

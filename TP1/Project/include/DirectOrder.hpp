@@ -1,19 +1,19 @@
 #ifndef DIRECT_H
 #define DIRECT_H
 
-#include <string>
 #include "Order.hpp"
-        
+#include <string>
+
 class DirectOrder : public Order {
 
-    private:
-        DirectOrder* next;
+private:
+  DirectOrder *next;
 
-    public:
-        DirectOrder(std::string order, int bot);
+public:
+  DirectOrder(std::string order, int bot);
 
-        void setNext(DirectOrder* i);
-        DirectOrder* getNext();
+  void setNext(DirectOrder *i);
+  DirectOrder *getNext();
 };
 
 #endif

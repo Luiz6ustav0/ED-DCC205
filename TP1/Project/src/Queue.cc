@@ -6,28 +6,24 @@ Queue::Queue() : size(0), front(nullptr), back(nullptr) {}
 Queue::~Queue() {}
 
 void Queue::insert(Order i) {
-    if (this->isEmpty()) {
-        this->front = new Order(i);
-        this->back = this->front;
-        this->size++;
-    } else {
-
-    }
+  if (this->isEmpty()) {
+    this->front = new Order(i);
+    this->back = this->front;
+    this->size++;
+  } else {
+  }
 };
 
+Order *Queue::dequeue() { return this->front; };
 
-Order* Queue::dequeue() {
-    return this->front;
-};
-
-
-void Queue::clean() {
+void Queue::clean(){
     // while (this->front)
 };
 
 bool Queue::isEmpty() const {
-    if (this->size > 0) return true;
-    return false;
+  if (this->size > 0)
+    return true;
+  return false;
 }
 
 // getters
