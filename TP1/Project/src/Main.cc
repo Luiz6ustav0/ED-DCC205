@@ -12,10 +12,10 @@
 
 TEST_SUITE("Order nodes") {
   TEST_CASE("DirectOrder nodes") {
-    DirectOrder *ord1 = new DirectOrder("Activate", 1);
-    DirectOrder *ord2 = new DirectOrder("Deactivate", 3);
+    DirectOrder *ord1 = new DirectOrder("ATIVAR", 1);
+    DirectOrder *ord2 = new DirectOrder("RELATORIO", 3);
 
-    CHECK(ord1->getOrder() == "Activate");
+    CHECK(ord1->getOrder() == "ATIVAR");
     CHECK(ord1->getRobot() == 1);
     CHECK(ord2->getNext() == nullptr);
 
@@ -28,9 +28,22 @@ TEST_SUITE("Order nodes") {
   }
 
   TEST_CASE("CommandOrders") {
-    CommandOrder *ord1 = new CommandOrder("Collect", 2);
+    CommandOrder *ord1 = new CommandOrder("COLETAR", 2);
+    CommandOrder *ord2 = new CommandOrder("MOVER", 4, 5, 8);
 
     CHECK(ord1->getX() == -1);
+    CHECK(ord1->getY() == -1);
+    CHECK(ord2->getX() == 5);
+    CHECK(ord2->getY() == 8);
+
+    CHECK(ord1->getNext() == nullptr);
+    CHECK(ord1->getNext() == ord2->getNext());
+
+    ord1->setNext(ord2);
+    CHECK(ord1->getNext() == ord2);
+
+    delete ord1;
+    delete ord2;
   }
 
   // TEST_CASE("Inserting in a queue") {
