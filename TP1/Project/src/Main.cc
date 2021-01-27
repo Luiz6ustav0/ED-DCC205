@@ -58,4 +58,9 @@ TEST_SUITE("Queue") {
     CHECK(q.getSize() == 0);
     CHECK(q.isEmpty() == true);
   }
+  // TODO: Add testing for insert method
+  // TODO: Add testing for dequeue method
+  // TODO: Add testing for clean method
+  // TODO: Add test for destructor
+  // TODO: Add test for using different types
 }
