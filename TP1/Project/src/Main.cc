@@ -69,15 +69,14 @@ TEST_SUITE("Queue") {
     // given
     Queue<DirectOrder> q;
     DirectOrder ord1("ATIVAR", 1);
-    DirectOrder ord2("RELATORIO", 3);
 
     // when
     q.insert(ord1);
 
     // then
     CHECK(q.isEmpty() == false);
-    CHECK(q.getFront()->getOrder() == ord1.getOrder());
-    CHECK(q.getBack()->getRobot() == ord1.getRobot());
+    CHECK(q.getFront()->getItem().getOrder() == ord1.getOrder());
+    CHECK(q.getBack()->getItem().getRobot() == ord1.getRobot());
   }
   // TODO: Add testing for insert method
   // TODO: Add testing for dequeue method
