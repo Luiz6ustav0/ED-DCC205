@@ -34,7 +34,9 @@ SRC_FOLDER = ./src/
 
 # all sources, objs, and header files
 MAIN = Main
+TEST = Test-Suite.cc
 TARGET = run.out
+TARGET_TEST = test.out
 SRC = $(wildcard $(SRC_FOLDER)*.cc)
 OBJ = $(patsubst $(SRC_FOLDER)%.cc, $(OBJ_FOLDER)%.o, $(SRC))
 
@@ -43,6 +45,11 @@ $(OBJ_FOLDER)%.o: $(SRC_FOLDER)%.cc
 
 all: $(OBJ)
 	@$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET) $(OBJ)
+
+test: $(OBJ)
+	@$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET_TEST) $(OBJ)
+	@clear
+	@./bin/test.out
 
 clean:
 	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)* ${TEST_DIR}/*.out ${TEST_DIR}/*.o
