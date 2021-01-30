@@ -5,7 +5,7 @@
 #include "Order.hpp"
 #include <string>
 
-/* Classe Celula */
+///* Classe Celula *///
 
 template <class T> class Celula {
   T item;
@@ -18,6 +18,8 @@ public:
   void setItem(T i) { this->item = i; }
   T getItem() const { return this->item; }
 };
+
+///* Classe Fila *///
 
 template <class T> class Queue {
 
@@ -51,7 +53,7 @@ template <class T> Queue<T>::~Queue() {
   }
 };
 
-// Operations
+///* Operations *///
 
 template <class T> void Queue<T>::insert(T x) {
   Celula<T> *temp = new Celula<T>;
@@ -90,7 +92,7 @@ template <class T> void Queue<T>::clear() {
   this->back = this->front = nullptr;
 }
 
-// Getters
+///* Getters *///
 
 template <class T> bool Queue<T>::isEmpty() const {
   return this->size == 0 ? true : false;
