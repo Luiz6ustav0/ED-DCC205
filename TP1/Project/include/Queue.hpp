@@ -13,7 +13,7 @@ template <class T> class Celula {
 
 public:
   Celula() : next(nullptr) {}
-  Celula<T>* getNext() const { return this->next; }
+  Celula<T> *getNext() const { return this->next; }
   void setNext(Celula<T> *n) { this->next = n; }
   void setItem(T i) { this->item = i; }
   T getItem() const { return this->item; }
@@ -66,6 +66,19 @@ template <class T> void Queue<T>::insert(T x) {
 
 template <class T> bool Queue<T>::isEmpty() const {
   return this->size == 0 ? true : false;
+};
+
+template <class T> T Queue<T>::dequeue() {
+  if (this->size > 0 && this->front != nullptr) {
+    T order = this->getFront()->getItem();
+
+    Celula<T> *temp = this->front;
+    this->front = this->front->getNext();
+    delete temp;
+    size--;
+    return order;
+  }
+  throw "Fila vazia";
 };
 
 template <class T> int Queue<T>::getSize() const { return this->size; };

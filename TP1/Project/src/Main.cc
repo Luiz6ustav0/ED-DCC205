@@ -18,7 +18,7 @@ TEST_SUITE("Order nodes") {
 
     // when
     ord1->setNext(ord2);
-    
+
     // then
     CHECK(ord1->getOrder() == "ATIVAR");
     CHECK(ord1->getRobot() == 1);
@@ -44,7 +44,7 @@ TEST_SUITE("Order nodes") {
     CHECK(ord2->getY() == 8);
     CHECK(ord1->getOrder() == "COLETAR");
     CHECK(ord2->getRobot() == 4);
-    
+
     CHECK(ord1->getNext() == ord2);
     CHECK(ord2->getNext() == nullptr);
 
@@ -60,11 +60,10 @@ TEST_SUITE("Queue") {
 
     // then
     CHECK(q.getFront() == nullptr);
-    CHECK(q.getBack() == nullptr);
     CHECK(q.getSize() == 0);
     CHECK(q.isEmpty() == true);
   }
-  
+
   TEST_CASE("Insert first element") {
     // given
     Queue<DirectOrder> q;
@@ -75,10 +74,71 @@ TEST_SUITE("Queue") {
 
     // then
     CHECK(q.isEmpty() == false);
+    CHECK(q.getSize() == 1);
     CHECK(q.getFront()->getItem().getOrder() == ord1.getOrder());
-    CHECK(q.getBack()->getItem().getRobot() == ord1.getRobot());
   }
-  // TODO: Add testing for insert method
+
+  TEST_CASE("Insert more elements") {
+    // given
+    Queue<CommandOrder> q;
+    CommandOrder ord1("MOVER", 1, 5, 3);
+    CommandOrder ord2("COLETAR", 8);
+
+    // when
+    q.insert(ord1);
+    q.insert(ord2);
+
+    // then
+    CHECK(q.isEmpty() == false);
+    CHECK(q.getSize() == 2);
+    CHECK(q.getFront()->getItem().getOrder() == ord1.getOrder());
+    CHECK(q.getFront()->getItem().getRobot() == ord1.getRobot());
+  }
+
+  TEST_CASE("Insert elements and dequeue") {
+    // given
+    Queue<DirectOrder> q;
+    DirectOrder ord1("ATIVAR", 1);
+    DirectOrder ord2("ATIVAR", 8);
+    DirectOrder ord3("ATIVAR", 3);
+
+    // when
+    q.insert(ord1);
+    q.insert(ord2);
+    q.insert(ord3);
+
+    // then
+    CHECK(q.isEmpty() == false);
+    CHECK(q.getSize() == 3);
+
+    CHECK(q.dequeue().getRobot() == ord1.getRobot());
+    CHECK(q.getSize() == 2);
+    CHECK(q.dequeue().getRobot() == ord2.getRobot());
+    CHECK(q.getSize() == 1);
+    CHECK(q.getFront()->getItem().getRobot() == ord3.getRobot());
+  }
+
+  TEST_CASE("Empty queue") {
+    // given
+    Queue<DirectOrder> q;
+    DirectOrder ord1("ATIVAR", 1);
+    DirectOrder ord2("ATIVAR", 8);
+    DirectOrder ord3("ATIVAR", 3);
+
+    // when
+    q.insert(ord1);
+    q.insert(ord2);
+    q.insert(ord3);
+    q.dequeue();
+    q.dequeue();
+    q.dequeue();
+
+    // then
+    CHECK(q.isEmpty() == true);
+    CHECK(q.getSize() == 0);
+  }
+
+  // TODO: Add more testing for insert method
   // TODO: Add testing for dequeue method
   // TODO: Add testing for clean method
   // TODO: Add test for destructor
