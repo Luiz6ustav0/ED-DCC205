@@ -10,7 +10,7 @@ private:
   DirectOrder *next;
 
 public:
-  DirectOrder(std::string order, int bot);
+  DirectOrder(std::string order="", int bot=-1);
 
   void setNext(DirectOrder *i);
   DirectOrder *getNext();

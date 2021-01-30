@@ -11,7 +11,7 @@ private:
   int x, y;
 
 public:
-  CommandOrder(std::string order, int bot, int posX = -1, int posY = -1);
+  CommandOrder(std::string order="", int bot=-1, int posX = -1, int posY = -1);
 
   void setNext(CommandOrder *i);
   CommandOrder* getNext();

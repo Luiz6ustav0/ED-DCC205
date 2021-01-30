@@ -12,10 +12,11 @@ template <class T> class Celula {
   Celula<T> *next;
 
 public:
-  Celula(T a) : item(a), next(nullptr){};
-  void setNext(T a) { this->next = new Celula<T>(a); };
-  Celula<T> *getNext() { return this->next; };
-  T getItem() { return this->item; };
+  Celula() : next(nullptr) {}
+  Celula<T>* getNext() const { return this->next; }
+  void setNext(Celula<T> *n) { this->next = n; }
+  void setItem(T i) { this->item = i; }
+  T getItem() const { return this->item; }
 };
 
 template <class T> class Queue {
@@ -29,45 +30,46 @@ public:
   Queue();
   ~Queue();
 
+  // Operations
   void insert(T x);
   T dequeue();
-  void clean();
 
-  // getters
+  // Getters
   int getSize() const;
   bool isEmpty() const;
   Celula<T> *getFront() const;
-  Celula<T> *getBack() const;
 };
 
-template <class T> Queue<T>::Queue() : front(nullptr), back(nullptr), size(0){};
+template <class T> Queue<T>::Queue() : size(0), front(nullptr), back(nullptr) {}
 
 template <class T> Queue<T>::~Queue() {
-  while (this->front != nullptr) {
-    Celula<T> *temp = this->front->getNext();
-    delete this->front;
-    this->front = temp;
+  while (front != nullptr) {
+    Celula<T> *temp = this->front;
+    this->front = this->front->getNext();
+    delete temp;
   }
 };
 
 template <class T> void Queue<T>::insert(T x) {
-  if (this->front == nullptr) {
-    this->front = new Celula<T>(T(x));
-    this->back = this->front;
-    size++;
+  Celula<T> *temp = new Celula<T>;
+  temp->setItem(x);
+  // temp->getNext() = nullptr;
+  if (this->back == nullptr) {
+    this->back = temp;
+    this->front = temp;
   } else {
-    this->back->setNext(x);
+    this->back->setNext(temp);
+    this->back = temp;
   }
+  size++;
 }
 
 template <class T> bool Queue<T>::isEmpty() const {
-  return this->size <= 0 ? true : false;
+  return this->size == 0 ? true : false;
 };
 
 template <class T> int Queue<T>::getSize() const { return this->size; };
 
 template <class T> Celula<T> *Queue<T>::getFront() const { return this->front; }
-
-template <class T> Celula<T> *Queue<T>::getBack() const { return this->back; }
 
 #endif
