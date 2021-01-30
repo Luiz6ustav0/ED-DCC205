@@ -47,7 +47,7 @@ all: $(OBJ)
 	@$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET) $(OBJ)
 
 test: $(OBJ)
-	@$(CC) $(CXXFLAGS) -o $(BIN_FOLDER)$(TARGET_TEST) $(OBJ)
+	@$(CC) $(CXXFLAGS) -I$(INCLUDE_FOLDER) -o $(BIN_FOLDER)$(TARGET_TEST) $(OBJ) ./tests/Test-Suite.cc
 	@clear
 	@./bin/test.out
 

@@ -1,7 +1,7 @@
-#include "Test.h"
+// #include "Test.h"
 
-Test::Test() {}
+// Test::Test() {}
 
-Test::~Test() {}
+// Test::~Test() {}
 
-void Test::Print() { printf("Test\n"); }
+// void Test::Print() { printf("Test\n"); }
