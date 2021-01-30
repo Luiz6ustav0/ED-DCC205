@@ -33,6 +33,7 @@ public:
   // Operations
   void insert(T x);
   T dequeue();
+  void clear();
 
   // Getters
   int getSize() const;
@@ -50,6 +51,8 @@ template <class T> Queue<T>::~Queue() {
   }
 };
 
+// Operations
+
 template <class T> void Queue<T>::insert(T x) {
   Celula<T> *temp = new Celula<T>;
   temp->setItem(x);
@@ -64,10 +67,6 @@ template <class T> void Queue<T>::insert(T x) {
   size++;
 }
 
-template <class T> bool Queue<T>::isEmpty() const {
-  return this->size == 0 ? true : false;
-};
-
 template <class T> T Queue<T>::dequeue() {
   if (this->size > 0 && this->front != nullptr) {
     T order = this->getFront()->getItem();
@@ -79,6 +78,22 @@ template <class T> T Queue<T>::dequeue() {
     return order;
   }
   throw "Fila vazia";
+};
+
+template <class T> void Queue<T>::clear() {
+  while (front != nullptr) {
+    Celula<T> *temp = this->front;
+    this->front = this->front->getNext();
+    delete temp;
+    size--;
+  }
+  this->back = this->front = nullptr;
+}
+
+// Getters
+
+template <class T> bool Queue<T>::isEmpty() const {
+  return this->size == 0 ? true : false;
 };
 
 template <class T> int Queue<T>::getSize() const { return this->size; };

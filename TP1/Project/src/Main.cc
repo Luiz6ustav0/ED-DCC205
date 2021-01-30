@@ -4,11 +4,11 @@
 // Aplicação: Números Complexos.
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "../include/doctest.h"
+#include "doctest.h"
 
-#include "../include/CommandOrder.hpp"
-#include "../include/DirectOrder.hpp"
-#include "../include/Queue.hpp"
+#include "CommandOrder.hpp"
+#include "DirectOrder.hpp"
+#include "Queue.hpp"
 
 TEST_SUITE("Order nodes") {
   TEST_CASE("DirectOrder nodes") {
@@ -138,9 +138,38 @@ TEST_SUITE("Queue") {
     CHECK(q.getSize() == 0);
   }
 
-  // TODO: Add more testing for insert method
-  // TODO: Add testing for dequeue method
-  // TODO: Add testing for clean method
-  // TODO: Add test for destructor
-  // TODO: Add test for using different types
+  TEST_CASE("Clear queue") {
+    // given
+    Queue<DirectOrder> q;
+    DirectOrder ord1("ATIVAR", 1);
+    DirectOrder ord2("ATIVAR", 8);
+
+    // when
+    q.insert(ord1);
+    q.insert(ord2);
+    q.clear();
+
+    // then
+    CHECK(q.getFront() == nullptr);
+    CHECK(q.isEmpty() == true);
+    CHECK(q.getSize() == 0);
+  }
+
+  TEST_CASE("Clear queue then add elements") {
+    // given
+    Queue<DirectOrder> q;
+    DirectOrder ord1("ATIVAR", 1);
+    DirectOrder ord2("ATIVAR", 8);
+
+    // when
+    q.insert(ord1);
+    q.insert(ord2);
+    q.clear();
+    q.insert(ord1);
+
+    // then
+    CHECK(q.isEmpty() == false);
+    CHECK(q.getSize() == 1);
+    CHECK(q.dequeue().getOrder() == ord1.getOrder());
+  }
 }
