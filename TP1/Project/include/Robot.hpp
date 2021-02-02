@@ -13,6 +13,7 @@ public:
   Queue<DirectOrder> directOrders;
   Queue<CommandOrder> commandOrders;
 
+  void activate();
   bool isLogEmpty() const;
   bool isActivated() const;
   int getPosX() const;

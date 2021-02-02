@@ -189,7 +189,17 @@ TEST_SUITE("Robot class") {
     CHECK(r.commandOrders.isEmpty() == true);
   }
 
-  TEST_CASE("Activates") {}
+  TEST_CASE("Activates") {
+    // given
+    Robot r = Robot();
+
+    // when
+    r.activate();
+
+    // then
+    CHECK(r.isActivated() == true);
+
+  }
 
   TEST_CASE("Moves") {}
 
