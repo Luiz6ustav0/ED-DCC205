@@ -50,6 +50,7 @@ test: $(OBJ)
 	@$(CC) $(CXXFLAGS) -I$(INCLUDE_FOLDER) -o $(BIN_FOLDER)$(TARGET_TEST) $(OBJ) ./tests/Test-Suite.cc
 	@clear
 	@./bin/test.out
+	@make clean
 
 clean:
 	@rm -rf $(OBJ_FOLDER)* $(BIN_FOLDER)* ${TEST_DIR}/*.out ${TEST_DIR}/*.o

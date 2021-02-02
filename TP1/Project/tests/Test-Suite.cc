@@ -9,6 +9,7 @@
 #include "CommandOrder.hpp"
 #include "DirectOrder.hpp"
 #include "Queue.hpp"
+#include "Robot.hpp"
 
 TEST_SUITE("Order nodes") {
   TEST_CASE("DirectOrder nodes") {
@@ -172,4 +173,27 @@ TEST_SUITE("Queue") {
     CHECK(q.getSize() == 1);
     CHECK(q.dequeue().getOrder() == ord1.getOrder());
   }
+}
+
+TEST_SUITE("Robot class") {
+  TEST_CASE("Instantiation") {
+    // given when
+    Robot r = Robot();
+
+    // then
+    CHECK(r.isActivated() == false);
+    CHECK(r.getPosX() == 0);
+    CHECK(r.getPosY() == 0);
+    CHECK(r.isLogEmpty() == true);
+    CHECK(r.directOrders.isEmpty() == true);
+    CHECK(r.commandOrders.isEmpty() == true);
+  }
+
+  TEST_CASE("Activates") {}
+
+  TEST_CASE("Moves") {}
+
+  TEST_CASE("Prints history") {}
+
+  TEST_CASE("Cleans history") {}
 }
