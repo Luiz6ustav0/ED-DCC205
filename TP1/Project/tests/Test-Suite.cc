@@ -5,9 +5,11 @@
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
+#include <fstream>
 
 #include "CommandOrder.hpp"
 #include "DirectOrder.hpp"
+#include "PlanetMap.hpp"
 #include "Queue.hpp"
 #include "Robot.hpp"
 
@@ -198,12 +200,70 @@ TEST_SUITE("Robot class") {
 
     // then
     CHECK(r.isActivated() == true);
-
   }
 
-  TEST_CASE("Moves") {}
+  TEST_CASE("Moves") {
+    // given
+    std::string fName = "./mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+    Robot r(m);
+    int x = 5;
+    int y = 4;
 
-  TEST_CASE("Prints history") {}
+    // when
+    r.move(x, y);
 
-  TEST_CASE("Cleans history") {}
+    // then
+    CHECK(r.getPosX() == 5);
+    CHECK(r.getPosY() == 4);
+    delete m;
+  }
+
+  TEST_CASE("Does not move to invalid position") {
+    // given
+    std::string fName = "./mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+    Robot r(m);
+    int x = 99;
+    int y = 99;
+
+    // when
+    r.move(x, y);
+
+    // then
+    CHECK(r.getPosX() == 0);
+    CHECK(r.getPosY() == 0);
+    delete m;
+  }
+
+  // TEST_CASE("Prints history") {}
+
+  // TEST_CASE("Cleans history") {}
+}
+
+TEST_SUITE("PlanetMap") {
+  // TODO: Create a new map inside this so it doesn't need to be kept the whole time
+  TEST_CASE("Default instantiation") {
+    // given
+    PlanetMap pm;
+
+    // then
+    CHECK(pm.getCols() == -1);
+    CHECK(pm.getRows() == -1);
+    CHECK(pm.get(0, 0) == -1);
+  }
+
+  TEST_CASE("Instantiation with a file") {
+    // given when
+    std::string fName = "./mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+
+    // then
+    CHECK(m->getCols() == 10);
+    CHECK(m->getRows() == 9);
+    CHECK(m->get(0, 0) == 'B');
+
+    delete m;
+  }
+
 }
