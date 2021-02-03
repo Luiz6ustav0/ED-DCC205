@@ -29,8 +29,19 @@ PlanetMap::~PlanetMap() {
   }
 }
 
+bool PlanetMap::validatePos(int row, int column) const {
+  return this->getRows() > row && this->getCols() > column;
+}
+
+void PlanetMap::changeToDot(int row, int column) {
+  if (this->validatePos(row, column)) {
+    if (row != 0 or column != 0)
+      this->m[row][column] = '.';
+  }
+}
+
 char PlanetMap::get(int a, int b) const {
-  if (a < this->nRows && b < this->nCols && this->m != nullptr)
+  if (this->validatePos(a, b) && this->m != nullptr)
     return this->m[a][b];
   else
     return -1;
