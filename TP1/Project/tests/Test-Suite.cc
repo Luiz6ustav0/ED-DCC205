@@ -242,7 +242,8 @@ TEST_SUITE("Robot class") {
 }
 
 TEST_SUITE("PlanetMap") {
-  // TODO: Create a new map inside this so it doesn't need to be kept the whole time
+  // TODO: Create a new map inside this so it doesn't need to be kept the whole
+  // time
   TEST_CASE("Default instantiation") {
     // given
     PlanetMap pm;
@@ -266,4 +267,18 @@ TEST_SUITE("PlanetMap") {
     delete m;
   }
 
+  TEST_CASE("Checking positions") {
+    // given when
+    std::string fName = "./mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+
+    // then
+    CHECK(m->get(0, 1) == '.');
+    CHECK(m->get(2, 4) == 'R');
+    CHECK(m->get(0, 0) == 'B');
+
+    delete m;
+  }
+
+  // TODO: Metodo para trocar valores em cada posiçao
 }
