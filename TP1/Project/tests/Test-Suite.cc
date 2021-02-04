@@ -290,9 +290,43 @@ TEST_SUITE("Robot class") {
     delete m;
   }
 
-  // TEST_CASE("Prints history") {}
+  TEST_CASE("Prints history") {
+    // given
+    std::string fName = "./tests/mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+    Robot r = Robot(m, 4);
 
-  // TEST_CASE("Cleans history") {}
+    // when
+    r.activate();
+    r.move(2, 3);
+    r.move(99, 99);
+
+    // then
+    CHECK(r.removeFromHistory() == std::string("ROBO 4: MOVEU PARA (2,3)"));
+    CHECK(r.removeFromHistory() == std::string("ROBO 4: IMPOSSIVEL MOVER PARA (99,99)"));
+
+    delete m;
+  }
+
+  TEST_CASE("Cleans history") {
+    std::string fName = "./tests/mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+    Robot r = Robot(m, 4);
+
+    // when
+    r.activate();
+    r.move(2, 3);
+    r.move(99, 99);
+    r.cleanHistory();
+
+    // then
+    try {
+      r.printHistory();
+    } catch (std::string e) {
+      CHECK(e == std::string("Nothing to print. Empty history"));
+    }
+    delete m;
+  }
 }
 
 TEST_SUITE("PlanetMap") {

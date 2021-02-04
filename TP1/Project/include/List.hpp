@@ -1,6 +1,8 @@
 #ifndef LIST_H
 #define LIST_H
 #include <string>
+#include <iostream>
+
 template <class T> class Node {
 private:
   T data;
@@ -22,13 +24,13 @@ public:
   bool isEmpty();
   int getSize() const;
   ~List();
-  // void printList();
+  void printList();
+  void clean();
 
 private:
   Node<T> *head;
   Node<T> *last;
   int size;
-  // void clearList();
 };
 
 template <class T> List<T>::List() : size(0), head(nullptr), last(nullptr) {}
@@ -41,6 +43,13 @@ template <class T> List<T>::~List() {
       delete current;
     }
   }
+}
+
+template <class T> void List<T>::clean() {
+  this->~List();
+  this->head = nullptr;
+  this->last = this->head;
+  this->size = 0;
 }
 
 template <class T> void List<T>::insert(T val) {
@@ -72,6 +81,18 @@ template <class T> int List<T>::getSize() const { return this->size; }
 
 template <class T> bool List<T>::isEmpty() {
   return this->getSize() > 0 ? false : true;
+}
+
+template <class T> void List<T>::printList() {
+  if (this->head) {
+    Node<T> *current = this->head;
+    std::cout << std::endl;
+    while (current->getNext() != nullptr) {
+      std::cout << current->getData() << std::endl;
+      current = current->getNext();
+    }
+    std::cout << current->getData() << std::endl;
+  }
 }
 
 #endif

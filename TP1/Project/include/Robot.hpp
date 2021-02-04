@@ -2,15 +2,19 @@
 #include "DirectOrder.hpp"
 #include "Queue.hpp"
 #include "PlanetMap.hpp"
+#include "List.hpp"
 
 class Robot {
+  int robot;
   bool activated;
   bool logEmpty;
   int position[2];
   PlanetMap *pMap;
+  List<std::string> history;
+  void writeToHistory(std::string s);
 
 public:
-  Robot(PlanetMap *m=nullptr);
+  Robot(PlanetMap *m=nullptr, int robo=-1);
 
   Queue<DirectOrder> directOrders;
   Queue<CommandOrder> commandOrders;
@@ -20,9 +24,13 @@ public:
   bool isActivated() const;
   int getPosX() const;
   int getPosY() const;
+  int getRobot() const;
+  std::string removeFromHistory();
 
   // setters/utils
   void activate();
   void move(int x, int y);
   void setMap(PlanetMap *m);
+  void printHistory();
+  void cleanHistory();
 };
