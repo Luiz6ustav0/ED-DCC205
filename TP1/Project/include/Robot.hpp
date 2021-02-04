@@ -1,8 +1,8 @@
 #include "CommandOrder.hpp"
 #include "DirectOrder.hpp"
-#include "Queue.hpp"
-#include "PlanetMap.hpp"
 #include "List.hpp"
+#include "PlanetMap.hpp"
+#include "Queue.hpp"
 
 class Robot {
   int robot;
@@ -14,7 +14,7 @@ class Robot {
   void writeToHistory(std::string s);
 
 public:
-  Robot(PlanetMap *m=nullptr, int robo=-1);
+  Robot(PlanetMap *m = nullptr, int robo = -1);
 
   Queue<DirectOrder> directOrders;
   Queue<CommandOrder> commandOrders;

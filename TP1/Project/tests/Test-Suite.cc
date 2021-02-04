@@ -303,7 +303,8 @@ TEST_SUITE("Robot class") {
 
     // then
     CHECK(r.removeFromHistory() == std::string("ROBO 4: MOVEU PARA (2,3)"));
-    CHECK(r.removeFromHistory() == std::string("ROBO 4: IMPOSSIVEL MOVER PARA (99,99)"));
+    CHECK(r.removeFromHistory() ==
+          std::string("ROBO 4: IMPOSSIVEL MOVER PARA (99,99)"));
 
     delete m;
   }

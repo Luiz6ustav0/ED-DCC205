@@ -1,7 +1,7 @@
 #ifndef LIST_H
 #define LIST_H
-#include <string>
 #include <iostream>
+#include <string>
 
 template <class T> class Node {
 private:

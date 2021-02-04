@@ -48,10 +48,13 @@ void Robot::move(int a, int b) {
 void Robot::printHistory() {
   if (!this->history.isEmpty()) {
     this->history.printList();
-  } else throw std::string("Nothing to print. Empty history");
+  } else
+    throw std::string("Nothing to print. Empty history");
 }
 
 void Robot::cleanHistory() {
-  if (!this->history.isEmpty()) this->history.clean();
-  else throw std::string("Nothing to clean. Empty history");
+  if (!this->history.isEmpty())
+    this->history.clean();
+  else
+    throw std::string("Nothing to clean. Empty history");
 }
