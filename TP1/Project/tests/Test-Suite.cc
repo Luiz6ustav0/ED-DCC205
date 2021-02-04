@@ -9,10 +9,10 @@
 
 #include "CommandOrder.hpp"
 #include "DirectOrder.hpp"
+#include "List.hpp"
 #include "PlanetMap.hpp"
 #include "Queue.hpp"
 #include "Robot.hpp"
-#include "List.hpp"
 
 TEST_SUITE("Order nodes") {
   TEST_CASE("DirectOrder nodes") {
@@ -191,12 +191,43 @@ TEST_SUITE("List") {
   TEST_CASE("Insert element") {
     // given
     List<CommandOrder> L;
-    CommandOrder c()
-  
+    CommandOrder ord1("MOVER", 1, 5, 3);
+
+    // when
+    L.insert(ord1);
 
     // then
-    CHECK(L.getSize() == 0);
-    CHECK(L.isEmpty() == true);
+    CHECK(L.getSize() == 1);
+    CHECK(L.isEmpty() == false);
+  }
+
+  TEST_CASE("Insert elements and remove") {
+    // given
+    List<CommandOrder> L;
+    CommandOrder ord1("MOVER", 1, 5, 3);
+    CommandOrder ord2("MOVER", 3, 2, 2);
+
+    // when
+    L.insert(ord1);
+    L.insert(ord2);
+
+    // then
+    CHECK(L.getSize() == 2);
+    CHECK(L.isEmpty() == false);
+    CHECK(L.remove().getOrder() == ord1.getOrder());
+    CHECK(L.getSize() == 1);
+  }
+
+  TEST_CASE("Empty remove throws exception") {
+    // given
+    List<CommandOrder> L;
+
+    // when removing then
+    try {
+      L.remove();
+    } catch (std::string s) {
+      CHECK(s == std::string("Can't remove element. Empty list"));
+    }
   }
 }
 
@@ -227,7 +258,7 @@ TEST_SUITE("Robot class") {
 
   TEST_CASE("Moves") {
     // given
-    std::string fName = "./mapa_test.txt";
+    std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
     Robot r(m);
     int x = 5;
@@ -244,7 +275,7 @@ TEST_SUITE("Robot class") {
 
   TEST_CASE("Does not move to invalid position") {
     // given
-    std::string fName = "./mapa_test.txt";
+    std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
     Robot r(m);
     int x = 99;
@@ -277,7 +308,7 @@ TEST_SUITE("PlanetMap") {
 
   TEST_CASE("Instantiation with a file") {
     // given when
-    std::string fName = "./mapa_test.txt";
+    std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
 
     // then
@@ -290,7 +321,7 @@ TEST_SUITE("PlanetMap") {
 
   TEST_CASE("Checking positions") {
     // given when
-    std::string fName = "./mapa_test.txt";
+    std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
 
     // then
@@ -303,7 +334,7 @@ TEST_SUITE("PlanetMap") {
 
   TEST_CASE("Changes char to dot") {
     // given
-    std::string fName = "./mapa_test.txt";
+    std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
 
     // when
@@ -319,7 +350,7 @@ TEST_SUITE("PlanetMap") {
 
   TEST_CASE("Does not change base to dot") {
     // given
-    std::string fName = "./mapa_test.txt";
+    std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
 
     // when
