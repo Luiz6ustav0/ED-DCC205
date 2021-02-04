@@ -12,6 +12,7 @@
 #include "PlanetMap.hpp"
 #include "Queue.hpp"
 #include "Robot.hpp"
+#include "List.hpp"
 
 TEST_SUITE("Order nodes") {
   TEST_CASE("DirectOrder nodes") {
@@ -177,6 +178,28 @@ TEST_SUITE("Queue") {
   }
 }
 
+TEST_SUITE("List") {
+  TEST_CASE("Instantiation") {
+    // given
+    List<CommandOrder> L;
+
+    // then
+    CHECK(L.getSize() == 0);
+    CHECK(L.isEmpty() == true);
+  }
+
+  TEST_CASE("Insert element") {
+    // given
+    List<CommandOrder> L;
+    CommandOrder c()
+  
+
+    // then
+    CHECK(L.getSize() == 0);
+    CHECK(L.isEmpty() == true);
+  }
+}
+
 TEST_SUITE("Robot class") {
   TEST_CASE("Instantiation") {
     // given when
@@ -242,8 +265,6 @@ TEST_SUITE("Robot class") {
 }
 
 TEST_SUITE("PlanetMap") {
-  // TODO: Create a new map inside this so it doesn't need to be kept the whole
-  // time
   TEST_CASE("Default instantiation") {
     // given
     PlanetMap pm;
@@ -280,5 +301,33 @@ TEST_SUITE("PlanetMap") {
     delete m;
   }
 
-  // TODO: Metodo para trocar valores em cada posiçao
+  TEST_CASE("Changes char to dot") {
+    // given
+    std::string fName = "./mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+
+    // when
+    m->changeToDot(2, 4); // 'R'
+    m->changeToDot(0, 6); // 'O'
+
+    // then
+    CHECK(m->get(2, 4) == '.');
+    CHECK(m->get(0, 6) == '.');
+
+    delete m;
+  }
+
+  TEST_CASE("Does not change base to dot") {
+    // given
+    std::string fName = "./mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+
+    // when
+    m->changeToDot(0, 0); // 'B'
+
+    // then
+    CHECK(m->get(0, 0) == 'B');
+
+    delete m;
+  }
 }

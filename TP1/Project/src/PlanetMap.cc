@@ -35,7 +35,7 @@ bool PlanetMap::validatePos(int row, int column) const {
 
 void PlanetMap::changeToDot(int row, int column) {
   if (this->validatePos(row, column)) {
-    if (row != 0 or column != 0)
+    if (row != 0 || column != 0)
       this->m[row][column] = '.';
   }
 }
