@@ -6,7 +6,8 @@
 #include <string>
 
 Robot::Robot(PlanetMap *m, int r)
-    : activated(false), logEmpty(true), robot(r), pMap(m) {
+    : activated(false), logEmpty(true), robot(r), pMap(m), aliens(0),
+      recursos(0) {
   this->position[0] = 0;
   this->position[1] = 0;
 }
@@ -20,6 +21,14 @@ int Robot::getPosX() const { return this->position[0]; }
 int Robot::getPosY() const { return this->position[1]; }
 
 int Robot::getRobot() const { return this->robot; }
+
+int Robot::getAliens() const { return this->aliens; }
+
+int Robot::getRecursos() const { return this->recursos; }
+
+void Robot::setRecursos(int r) { this->recursos = r; }
+
+void Robot::setAliens(int a) { this->aliens = a; }
 
 void Robot::activate() { this->activated = true; }
 
@@ -57,4 +66,48 @@ void Robot::cleanHistory() {
     this->history.clean();
   else
     throw std::string("Nothing to clean. Empty history");
+}
+
+void Robot::receiveOrder(std::string com, int xx, int yy) {
+  if (com[0] == '*') {
+    com.erase(0);
+    this->starOrders.insert(CommandOrder(com, this->robot, xx, yy));
+  } else if (com == "MOVER") {
+    this->commandOrders.insert(CommandOrder(com, this->robot, xx, yy));
+  } else if (com == "COLETAR" || com == "ELIMINAR") {
+    this->commandOrders.insert(CommandOrder(com, this->robot));
+  } else if (com == "EXECUTAR") {
+    this->execute();
+  }
+}
+
+void Robot::colect() {}
+
+void Robot::eliminate() {}
+
+void Robot::orderManager(CommandOrder c) {
+  if (c.getOrder() == "MOVER") {
+    this->move(c.getX(), c.getY());
+  } else if (c.getOrder() == "COLETAR") {
+    this->colect();
+  } else if (c.getOrder() == "ELIMINAR") {
+    this->eliminate();
+  }
+}
+
+void Robot::execute() {
+  if (this->isActivated()) {
+    if (!this->starOrders.isEmpty()) {
+      while (!this->starOrders.isEmpty()) {
+        CommandOrder c = starOrders.dequeue();
+        this->orderManager(c);
+      }
+    }
+    if (!this->commandOrders.isEmpty()) {
+      while (!this->commandOrders.isEmpty()) {
+        CommandOrder c = commandOrders.dequeue();
+        this->orderManager(c);
+      }
+    }
+  }
 }

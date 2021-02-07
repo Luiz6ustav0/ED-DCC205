@@ -12,12 +12,18 @@ class Robot {
   PlanetMap *pMap;
   List<std::string> history;
   void writeToHistory(std::string s);
+  int aliens, recursos;
+
+  // actions
+  void colect();
+  void eliminate();
+  void orderManager(CommandOrder ord);
 
 public:
   Robot(PlanetMap *m = nullptr, int robo = -1);
 
-  Queue<DirectOrder> directOrders;
   Queue<CommandOrder> commandOrders;
+  Queue<CommandOrder> starOrders;
 
   // getters
   bool isLogEmpty() const;
@@ -33,4 +39,10 @@ public:
   void setMap(PlanetMap *m);
   void printHistory();
   void cleanHistory();
+  void receiveOrder(std::string ord, int x = -1, int y = -1);
+  void execute();
+  int getAliens() const;
+  int getRecursos() const;
+  void setAliens(int a);
+  void setRecursos(int r);
 };

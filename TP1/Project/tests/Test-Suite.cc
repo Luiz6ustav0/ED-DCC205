@@ -241,7 +241,6 @@ TEST_SUITE("Robot class") {
     CHECK(r.getPosX() == 0);
     CHECK(r.getPosY() == 0);
     CHECK(r.isLogEmpty() == true);
-    CHECK(r.directOrders.isEmpty() == true);
     CHECK(r.commandOrders.isEmpty() == true);
   }
 
