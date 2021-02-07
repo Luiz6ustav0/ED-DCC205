@@ -39,7 +39,8 @@ void Robot::writeToHistory(std::string s) { this->history.insert(s); }
 void Robot::move(int a, int b) {
   if (this->pMap == nullptr) {
     ;
-  } else if (a < this->pMap->getRows() && b < this->pMap->getCols()) {
+  } else if (a < this->pMap->getRows() && b < this->pMap->getCols() &&
+             this->pMap->get(a, b) != 'O') {
     this->position[0] = a;
     this->position[1] = b;
     std::string str = "ROBO " + std::to_string(this->getRobot()) +
@@ -57,8 +58,7 @@ void Robot::move(int a, int b) {
 void Robot::printHistory() {
   if (!this->history.isEmpty()) {
     this->history.printList();
-  } else
-    throw std::string("Nothing to print. Empty history");
+  }
 }
 
 void Robot::cleanHistory() {
@@ -81,9 +81,40 @@ void Robot::receiveOrder(std::string com, int xx, int yy) {
   }
 }
 
-void Robot::colect() {}
+void Robot::colect() {
+  if (this->pMap->get(this->getPosX(), this->getPosY()) == 'R') {
+    this->recursos++;
+    this->pMap->changeToDot(this->getPosX(), this->getPosY());
+    std::string s = "ROBO " + std::to_string(this->robot) +
+                    ": RECURSOS COLETADOS EM (" +
+                    std::to_string(this->getPosX()) + "," +
+                    std::to_string(this->getPosY()) + ")";
+    this->writeToHistory(s);
+  } else {
+    std::string s = "ROBO " + std::to_string(this->robot) +
+                    ": IMPOSSIVEL COLETAR RECURSOS EM (" +
+                    std::to_string(this->getPosX()) + "," +
+                    std::to_string(this->getPosY()) + ")";
+    this->writeToHistory(s);
+  }
+}
 
-void Robot::eliminate() {}
+void Robot::eliminate() {
+  if (this->pMap->get(this->getPosX(), this->getPosY()) == 'H') {
+    this->aliens++;
+    this->pMap->changeToDot(this->getPosX(), this->getPosY());
+    std::string s = "ROBO " + std::to_string(this->robot) +
+                    ": ALIEN ELIMINADO EM (" + std::to_string(this->getPosX()) +
+                    "," + std::to_string(this->getPosY()) + ")";
+    this->writeToHistory(s);
+  } else {
+    std::string s = "ROBO " + std::to_string(this->robot) +
+                    ": IMPOSSIVEL ELIMINAR ALIEN EM (" +
+                    std::to_string(this->getPosX()) + "," +
+                    std::to_string(this->getPosY()) + ")";
+    this->writeToHistory(s);
+  }
+}
 
 void Robot::orderManager(CommandOrder c) {
   if (c.getOrder() == "MOVER") {

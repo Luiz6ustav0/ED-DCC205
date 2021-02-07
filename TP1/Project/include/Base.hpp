@@ -10,7 +10,6 @@ class Base {
     Base(std::string mapName);
     ~Base();
     PlanetMap* getMapPointer();
-    // void printRetornoRobo(int a, int r) const;
     void relatorioFinal() const;
     void sendOrder(std::string c, int robot, int x=-1, int y=-1);
 };

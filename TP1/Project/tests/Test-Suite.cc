@@ -260,15 +260,15 @@ TEST_SUITE("Robot class") {
     std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
     Robot r(m);
-    int x = 5;
-    int y = 4;
+    int x = 2;
+    int y = 2;
 
     // when
     r.move(x, y);
 
     // then
-    CHECK(r.getPosX() == 5);
-    CHECK(r.getPosY() == 4);
+    CHECK(r.getPosX() == 2);
+    CHECK(r.getPosY() == 2);
     delete m;
   }
 
@@ -325,6 +325,26 @@ TEST_SUITE("Robot class") {
     } catch (std::string e) {
       CHECK(e == std::string("Nothing to print. Empty history"));
     }
+    delete m;
+  }
+
+  TEST_CASE("Receives order") {
+    // given 
+    std::string fName = "./tests/mapa_test.txt";
+    PlanetMap *m = new PlanetMap(fName);
+    CommandOrder c1("MOVER", 4, 1, 4);
+    CommandOrder c2("COLETAR");
+    Robot r = Robot(m, 4);
+    r.activate();
+
+    // when
+    r.receiveOrder(c1.getOrder(), c1.getX(), c1.getY());
+    r.receiveOrder(c2.getOrder());
+    r.execute();
+
+    // then
+    r.printHistory();
+
     delete m;
   }
 }

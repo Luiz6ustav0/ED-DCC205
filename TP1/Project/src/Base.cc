@@ -11,10 +11,6 @@ Base::~Base() { delete this->m; }
 
 PlanetMap *Base::getMapPointer() { return this->m; }
 
-// void Base::printRetornoRobo(int alien, int recur) const {
-//     std::cout <<
-// }
-
 void Base::relatorioFinal() const {
   std::cout << "BASE: TOTAL DE ALIENS " << this->aliens << " RECURSOS "
             << this->recursos << std::endl;
@@ -52,6 +48,8 @@ void Base::sendOrder(std::string str, int robo, int x, int y) {
       } else
         std::cout << "BASE: ROBO " << robo << " NAO ESTA EM MISSAO"
                   << std::endl;
+    } else {
+      this->r[robo].receiveOrder(str, x, y);
     }
   }
 }

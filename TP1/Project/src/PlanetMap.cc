@@ -30,7 +30,7 @@ PlanetMap::~PlanetMap() {
 }
 
 bool PlanetMap::validatePos(int row, int column) const {
-  return this->getRows() > row && this->getCols() > column;
+  return row >= 0 && column >= 0 && this->getRows() > row && this->getCols() > column;
 }
 
 void PlanetMap::changeToDot(int row, int column) {
