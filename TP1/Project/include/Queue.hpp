@@ -70,13 +70,16 @@ template <class T> void Queue<T>::insert(T x) {
 }
 
 template <class T> T Queue<T>::dequeue() {
-  if (this->size > 0 && this->front != nullptr) {
+  if (this->front != nullptr) {
     T order = this->getFront()->getItem();
 
     Celula<T> *temp = this->front;
     this->front = this->front->getNext();
     delete temp;
     size--;
+    if (this->getSize() == 0) {
+      this->back = this->front = nullptr;
+    }
     return order;
   }
   throw "Fila vazia";
@@ -95,7 +98,7 @@ template <class T> void Queue<T>::clear() {
 ///* Getters *///
 
 template <class T> bool Queue<T>::isEmpty() const {
-  return this->size == 0 ? true : false;
+  return this->size <= 0 ? true : false;
 };
 
 template <class T> int Queue<T>::getSize() const { return this->size; };

@@ -3,6 +3,7 @@
 // #include <iostream>
 // #include <sstream>
 // #include <string>
+// #include <algorithm>
 
 // int main(int argc, char *argv[]) {
 
@@ -22,7 +23,7 @@
 //       std::string temp;
 //       std::getline(f, temp);
 //       temp.erase(0, temp.find_first_not_of(chars));
-//       temp.replace(temp.begin(), temp.end(), ',', ' ');
+//       std::replace(temp.begin(), temp.end(), ',', ' ');
 //       std::stringstream ss(temp);
 //       ss >> x;
 //       ss >> y;
@@ -30,6 +31,7 @@
 //     } else {
 //       b.sendOrder(command, robot);
 //     }
+//     std::cout << command << " " << robot << std::endl;
 //   }
 //   b.relatorioFinal();
 //   return 0;

@@ -369,7 +369,7 @@ TEST_SUITE("PlanetMap") {
 
     // then
     CHECK(m->getCols() == 10);
-    CHECK(m->getRows() == 9);
+    CHECK(m->getRows() == 10);
     CHECK(m->get(0, 0) == 'B');
 
     delete m;
@@ -420,72 +420,68 @@ TEST_SUITE("PlanetMap") {
 }
 
 TEST_SUITE("Base") {
-  // TODO: Write test for heap-use after free
-  // on base.sendOrder.Robot::receiveOrder.insert.setNext
-  // TEST_CASE("Instantiation") {
-  //   // given
-  //   std::string arqMapa = "./tests/mapa_test.txt";
-  //   Base b(arqMapa);
+  TEST_CASE("Instantiation") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    Base b(arqMapa);
 
-  //   // when then
-  //   CHECK(b.getMapPointer()->getRows() == 9);
-  //   CHECK(b.getMapPointer()->getCols() == 10);
-  // }
+    // when then
+    CHECK(b.getMapPointer()->getRows() == 10);
+    CHECK(b.getMapPointer()->getCols() == 10);
+  }
 
-  // TEST_CASE("Base sends orders") {
-  //   // given
-  //   std::string arqMapa = "./tests/mapa_test.txt";
-  //   Base b(arqMapa);
-  //   std::string mover = "MOVER", executar = "EXECUTAR", ativar = "ATIVAR",
-  //               coletar = "COLETAR", relatorio = "RELATORIO";
-  //   int posX = 3, posY = 3, roboAlvo = 0;
+  TEST_CASE("Base sends orders") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    Base b(arqMapa);
+    std::string mover = "MOVER", executar = "EXECUTAR", ativar = "ATIVAR",
+                coletar = "COLETAR", relatorio = "RELATORIO";
+    int posX = 3, posY = 3, roboAlvo = 0;
 
-  //   // when
-  //   // b.sendOrder(ativar, roboAlvo, posX, posY);
-  //   b.sendOrder(mover, roboAlvo, posX, posY);
-  //   b.sendOrder(coletar, roboAlvo);
-  //   b.sendOrder(executar, roboAlvo);
+    // when
+    // b.sendOrder(ativar, roboAlvo, posX, posY);
+    b.sendOrder(mover, roboAlvo, posX, posY);
+    b.sendOrder(coletar, roboAlvo);
+    b.sendOrder(executar, roboAlvo);
 
-  //   // then
-  //   // b.sendOrder(relatorio, roboAlvo);
-  // }
+    // then
+    // b.sendOrder(relatorio, roboAlvo);
+  }
 
-  // TEST_CASE("Robo volta para a base") {
-  //   // given
-  //   std::string arqMapa = "./tests/mapa_test.txt";
-  //   Base b(arqMapa);
-  //   std::string mover = "MOVER", executar = "EXECUTAR", ativar = "ATIVAR",
-  //               coletar = "COLETAR", relatorio = "RELATORIO",
-  //               retornar = "RETORNAR";
-  //   int posX = 3, posY = 3, roboAlvo = 0;
+  TEST_CASE("Robo volta para a base") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    Base b(arqMapa);
+    std::string mover = "MOVER", executar = "EXECUTAR", ativar = "ATIVAR",
+                coletar = "COLETAR", relatorio = "RELATORIO",
+                retornar = "RETORNAR";
+    int posX = 3, posY = 3, roboAlvo = 0;
 
-  //   // when
-  //   b.sendOrder(ativar, roboAlvo, posX, posY);
-  //   b.sendOrder(mover, roboAlvo, posX, posY);
-  //   b.sendOrder(coletar, roboAlvo);
-  //   b.sendOrder(executar, roboAlvo);
+    // when
+    b.sendOrder(ativar, roboAlvo, posX, posY);
+    b.sendOrder(mover, roboAlvo, posX, posY);
+    b.sendOrder(coletar, roboAlvo);
+    b.sendOrder(executar, roboAlvo);
 
-  //   // then
-  //   b.sendOrder(relatorio, roboAlvo);
-  //   b.sendOrder(retornar, roboAlvo);
-  //   b.relatorioFinal();
-  // }
+    // then
+    b.sendOrder(relatorio, roboAlvo);
+    b.sendOrder(retornar, roboAlvo);
+    b.relatorioFinal();
+  }
 
   TEST_CASE("Le comando MOVE e posicao") {
     // given
     std::string arqMapa = "./tests/mapa_test.txt";
-    std::string arqComandos = "./tests/comandos_test.txt";
-    std::string c, relatorio = "RELATORIO";
+    std::string arqComandos = "./tests/comandos_test_move.txt";
+    std::string c;
     std::fstream f(arqComandos);
     Base b(arqMapa);
-    int posAlvoX = 12, posAlvoY = 11, robot = 0, x = -1, y = -1;
+    int posAlvoX = 1, posAlvoY = 1, robot = 0, x = -1, y = -1;
 
     // when
     while (f >> c) {
       f >> robot;
-      if (c != "MOVER") {
-        b.sendOrder(c, robot);
-      } else {
+      if (c == "MOVER" || c == "*MOVER") {
         std::string chars = " (";
         std::string temp;
         std::getline(f, temp);
@@ -494,9 +490,42 @@ TEST_SUITE("Base") {
         std::stringstream ss(temp);
         ss >> x;
         ss >> y;
+        b.sendOrder(c, robot, x, y);
+      } else {
+        b.sendOrder(c, robot);
       }
     }
+    // then
+    CHECK(x == posAlvoX);
+    CHECK(y == posAlvoY);
+  }
 
+  TEST_CASE("Le comandos e executa duas vezes") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    std::string arqComandos = "./tests/comandos_test.txt";
+    std::string c;
+    std::fstream f(arqComandos);
+    Base b(arqMapa);
+    int posAlvoX = 0, posAlvoY = 5, robot = 0, x = -1, y = -1;
+
+    // when
+    while (f >> c) {
+      f >> robot;
+      if (c == "MOVER" || c == "*MOVER") {
+        std::string chars = " (";
+        std::string temp;
+        std::getline(f, temp);
+        temp.erase(0, temp.find_first_not_of(chars));
+        std::replace(temp.begin(), temp.end(), ',', ' ');
+        std::stringstream ss(temp);
+        ss >> x;
+        ss >> y;
+        b.sendOrder(c, robot, x, y);
+      } else {
+        b.sendOrder(c, robot);
+      }
+    }
     // then
     CHECK(x == posAlvoX);
     CHECK(y == posAlvoY);

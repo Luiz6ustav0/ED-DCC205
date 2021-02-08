@@ -70,7 +70,7 @@ void Robot::cleanHistory() {
 
 void Robot::receiveOrder(std::string com, int xx, int yy) {
   if (com[0] == '*') {
-    com.erase(0);
+    com.erase(0, 1);
     this->starOrders.insert(CommandOrder(com, this->robot, xx, yy));
   } else if (com == "MOVER") {
     this->commandOrders.insert(CommandOrder(com, this->robot, xx, yy));
