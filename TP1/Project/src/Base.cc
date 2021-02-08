@@ -39,7 +39,7 @@ void Base::sendOrder(std::string str, int robo, int x, int y) {
         int tempAlien = this->r[robo].getAliens();
         int tempRecursos = this->r[robo].getRecursos();
         std::cout << "BASE: ROBO " << robo << " RETORNOU ALIENS " << tempAlien
-                  << " RECURSOS" << tempRecursos << std::endl;
+                  << " RECURSOS " << tempRecursos << std::endl;
         this->aliens += tempAlien;
         this->r[robo].setAliens(0);
         this->recursos += tempRecursos;

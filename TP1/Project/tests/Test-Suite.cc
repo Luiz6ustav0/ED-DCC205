@@ -12,7 +12,8 @@
 #include "List.hpp"
 #include "PlanetMap.hpp"
 #include "Queue.hpp"
-#include "Robot.hpp"
+// #include "Robot.hpp"
+#include "Base.hpp"
 
 TEST_SUITE("Order nodes") {
   TEST_CASE("DirectOrder nodes") {
@@ -329,7 +330,7 @@ TEST_SUITE("Robot class") {
   }
 
   TEST_CASE("Receives order") {
-    // given 
+    // given
     std::string fName = "./tests/mapa_test.txt";
     PlanetMap *m = new PlanetMap(fName);
     CommandOrder c1("MOVER", 4, 1, 4);
@@ -343,7 +344,7 @@ TEST_SUITE("Robot class") {
     r.execute();
 
     // then
-    r.printHistory();
+    // r.printHistory();
 
     delete m;
   }
@@ -414,5 +415,58 @@ TEST_SUITE("PlanetMap") {
     CHECK(m->get(0, 0) == 'B');
 
     delete m;
+  }
+}
+
+TEST_SUITE("Base") {
+  // TODO: Write test for heap-use after free
+  // on base.sendOrder.Robot::receiveOrder.insert.setNext
+  TEST_CASE("Instantiation") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    Base b(arqMapa);
+
+    // when then
+    CHECK(b.getMapPointer()->getRows() == 9);
+    CHECK(b.getMapPointer()->getCols() == 10);
+  }
+
+  TEST_CASE("Base sends orders") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    Base b(arqMapa);
+    std::string mover = "MOVER", executar = "EXECUTAR", ativar = "ATIVAR",
+                coletar = "COLETAR", relatorio = "RELATORIO";
+    int posX = 3, posY = 3, roboAlvo = 0;
+
+    // when
+    // b.sendOrder(ativar, roboAlvo, posX, posY);
+    b.sendOrder(mover, roboAlvo, posX, posY);
+    b.sendOrder(coletar, roboAlvo);
+    b.sendOrder(executar, roboAlvo);
+
+    // then
+    // b.sendOrder(relatorio, roboAlvo);
+  }
+
+  TEST_CASE("Robo volta para a base") {
+    // given
+    std::string arqMapa = "./tests/mapa_test.txt";
+    Base b(arqMapa);
+    std::string mover = "MOVER", executar = "EXECUTAR", ativar = "ATIVAR",
+                coletar = "COLETAR", relatorio = "RELATORIO",
+                retornar = "RETORNAR";
+    int posX = 3, posY = 3, roboAlvo = 0;
+
+    // when
+    b.sendOrder(ativar, roboAlvo, posX, posY);
+    b.sendOrder(mover, roboAlvo, posX, posY);
+    b.sendOrder(coletar, roboAlvo);
+    b.sendOrder(executar, roboAlvo);
+
+    // then
+    b.sendOrder(relatorio, roboAlvo);
+    b.sendOrder(retornar, roboAlvo);
+    b.relatorioFinal();
   }
 }
