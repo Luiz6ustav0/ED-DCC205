@@ -1,6 +1,7 @@
 // #include "../include/Base.hpp"
 // #include <fstream>
 // #include <iostream>
+// #include <sstream>
 // #include <string>
 
 // int main(int argc, char *argv[]) {
@@ -17,12 +18,14 @@
 //   while (f >> command) {
 //     f >> robot;
 //     if (command == "MOVER" || command == "*MOVER") {
+//       std::string chars = " (";
 //       std::string temp;
-//       std::getline(f, temp, '(');
-//       f >> x;
-//       std::getline(f, temp, ',');
-//       f >> y;
 //       std::getline(f, temp);
+//       temp.erase(0, temp.find_first_not_of(chars));
+//       temp.replace(temp.begin(), temp.end(), ',', ' ');
+//       std::stringstream ss(temp);
+//       ss >> x;
+//       ss >> y;
 //       b.sendOrder(command, robot, x, y);
 //     } else {
 //       b.sendOrder(command, robot);

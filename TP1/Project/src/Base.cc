@@ -20,10 +20,10 @@ void Base::sendOrder(std::string str, int robo, int x, int y) {
   if (robo < 50 && robo >= 0) {
     if (str == "ATIVAR") {
       if (this->r[robo].isActivated()) {
-        std::cout << "BASE: ROBO " << robo << " JA ESTA EM MISSAO" << std::endl;
+        std::cout << "BASE: ROBO " << robo << " JA ESTA EM MISSAO";
       } else {
         this->r[robo].activate();
-        std::cout << "BASE: ROBO " << robo << " SAIU EM MISSAO" << std::endl;
+        std::cout << "BASE: ROBO " << robo << " SAIU EM MISSAO";
       }
     } else if (str == " EXECUTAR") {
       if (this->r[robo].isActivated()) {

@@ -21,10 +21,10 @@
 
 # cc and flags
 CC = g++
-CXXFLAGS =-fsanitize=address,undefined -O1 -fno-omit-frame-pointer \
+#CXXFLAGS =-fsanitize=address,undefined -O1 -fno-omit-frame-pointer \
 		-g -Wall -Wshadow -std=c++14 \
 		-Wno-unused-result -Wno-sign-compare -Wno-char-subscripts
-#CXXFLAGS = -std=c++11 -O3 -Wall
+CXXFLAGS = -std=c++11 -O3 -Wall
 
 # folders
 INCLUDE_FOLDER = ./include/
