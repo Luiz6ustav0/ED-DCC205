@@ -35,6 +35,7 @@ public:
   // Operations
   void insert(T x);
   T dequeue();
+  void cheatInsert(T x);
   void clear();
 
   // Getters
@@ -84,6 +85,19 @@ template <class T> T Queue<T>::dequeue() {
   }
   throw "Fila vazia";
 };
+
+template <class T> void Queue<T>::cheatInsert(T x) {
+  Celula<T> *temp = new Celula<T>;
+  temp->setItem(x);
+  if (this->front == nullptr) {
+    this->front = temp;
+    this->back = temp;
+  } else {
+    temp->setNext(this->front);
+    this->front = temp;
+  }
+  size++;
+}
 
 template <class T> void Queue<T>::clear() {
   while (front != nullptr) {
