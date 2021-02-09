@@ -35,6 +35,7 @@ public:
 
   // setters/utils
   void activate();
+  void deactivate();
   void move(int x, int y);
   void setMap(PlanetMap *m);
   void printHistory();

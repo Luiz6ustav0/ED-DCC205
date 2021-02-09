@@ -32,6 +32,8 @@ void Robot::setAliens(int a) { this->aliens = a; }
 
 void Robot::activate() { this->activated = true; }
 
+void Robot::deactivate() { this->activated = false; }
+
 std::string Robot::removeFromHistory() { return this->history.remove(); }
 
 void Robot::writeToHistory(std::string s) { this->history.insert(s); }

@@ -45,6 +45,7 @@ void Base::sendOrder(std::string str, int robo, int x, int y) {
         this->recursos += tempRecursos;
         this->r[robo].setRecursos(0);
         this->r[robo].cleanHistory();
+        this->r[robo].deactivate();
       } else
         std::cout << "BASE: ROBO " << robo << " NAO ESTA EM MISSAO"
                   << std::endl;
