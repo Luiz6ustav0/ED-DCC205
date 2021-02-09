@@ -1,9 +1,17 @@
 #include "../include/Base.hpp"
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
-#include <algorithm>
+
+std::stringstream readPositionFromStringToStream(std::string &s) {
+  std::string chars = " (";
+  s.erase(0, s.find_first_not_of(chars));
+  std::replace(s.begin(), s.end(), ',', ' ');
+  std::stringstream ss(s);
+  return ss;
+}
 
 int main(int argc, char *argv[]) {
 
@@ -19,12 +27,9 @@ int main(int argc, char *argv[]) {
   while (f >> command) {
     f >> robot;
     if (command == "MOVER" || command == "*MOVER") {
-      std::string chars = " (";
       std::string temp;
       std::getline(f, temp);
-      temp.erase(0, temp.find_first_not_of(chars));
-      std::replace(temp.begin(), temp.end(), ',', ' ');
-      std::stringstream ss(temp);
+      std::stringstream ss = readPositionFromStringToStream(temp);
       ss >> x;
       ss >> y;
       b.sendOrder(command, robot, x, y);
