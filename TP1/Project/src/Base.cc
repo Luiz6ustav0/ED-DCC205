@@ -13,7 +13,7 @@ PlanetMap *Base::getMapPointer() { return this->m; }
 
 void Base::relatorioFinal() const {
   std::cout << "BASE: TOTAL DE ALIENS " << this->aliens << " RECURSOS "
-            << this->recursos << std::endl;
+            << this->recursos;
 }
 
 void Base::sendOrder(std::string str, int robo, int x, int y) {
