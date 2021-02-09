@@ -1,38 +1,37 @@
-// #include "../include/Base.hpp"
-// #include <fstream>
-// #include <iostream>
-// #include <sstream>
-// #include <string>
-// #include <algorithm>
+#include "../include/Base.hpp"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <algorithm>
 
-// int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
 
-//   std::string arqMapa = std::string(argv[1]);
-//   std::string arqComandos = argv[2];
+  std::string arqMapa = std::string(argv[1]);
+  std::string arqComandos = argv[2];
 
-//   std::string command = "";
-//   int x = -1, y = -1, robot = -1;
+  std::string command = "";
+  int x = -1, y = -1, robot = -1;
 
-//   Base b(arqMapa);
+  Base b(arqMapa);
 
-//   std::fstream f(arqComandos);
-//   while (f >> command) {
-//     f >> robot;
-//     if (command == "MOVER" || command == "*MOVER") {
-//       std::string chars = " (";
-//       std::string temp;
-//       std::getline(f, temp);
-//       temp.erase(0, temp.find_first_not_of(chars));
-//       std::replace(temp.begin(), temp.end(), ',', ' ');
-//       std::stringstream ss(temp);
-//       ss >> x;
-//       ss >> y;
-//       b.sendOrder(command, robot, x, y);
-//     } else {
-//       b.sendOrder(command, robot);
-//     }
-//     std::cout << command << " " << robot << std::endl;
-//   }
-//   b.relatorioFinal();
-//   return 0;
-// }
+  std::fstream f(arqComandos);
+  while (f >> command) {
+    f >> robot;
+    if (command == "MOVER" || command == "*MOVER") {
+      std::string chars = " (";
+      std::string temp;
+      std::getline(f, temp);
+      temp.erase(0, temp.find_first_not_of(chars));
+      std::replace(temp.begin(), temp.end(), ',', ' ');
+      std::stringstream ss(temp);
+      ss >> x;
+      ss >> y;
+      b.sendOrder(command, robot, x, y);
+    } else {
+      b.sendOrder(command, robot);
+    }
+  }
+  b.relatorioFinal();
+  return 0;
+}

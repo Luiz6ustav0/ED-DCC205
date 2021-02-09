@@ -86,7 +86,6 @@ template <class T> bool List<T>::isEmpty() {
 template <class T> void List<T>::printList() {
   if (this->head) {
     Node<T> *current = this->head;
-    std::cout << std::endl;
     while (current->getNext() != nullptr) {
       std::cout << current->getData() << std::endl;
       current = current->getNext();
