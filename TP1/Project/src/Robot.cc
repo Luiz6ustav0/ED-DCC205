@@ -78,8 +78,6 @@ void Robot::receiveOrder(std::string com, int xx, int yy) {
     this->commandOrders.insert(CommandOrder(com, this->robot, xx, yy));
   } else if (com == "COLETAR" || com == "ELIMINAR") {
     this->commandOrders.insert(CommandOrder(com, this->robot));
-  } else if (com == "EXECUTAR") {
-    this->execute();
   }
 }
 
