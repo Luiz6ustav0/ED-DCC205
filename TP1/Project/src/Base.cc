@@ -5,7 +5,7 @@ Base::Base(std::string fName) : aliens(0), recursos(0) {
   for (int i = 0; i < 50; ++i) {
     this->r[i] = Robot(this->m, i);
   }
-}ZZ
+}
 
 Base::~Base() { delete this->m; }
 
