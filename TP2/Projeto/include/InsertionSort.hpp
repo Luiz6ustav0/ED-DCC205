@@ -12,8 +12,9 @@ void insertionSort(std::vector<siPair> &vec)
         siPair valueToInsert = vec[i];
         int pos = i;
 
-        while (pos > 0 && vec[pos-1].second > valueToInsert.second) {
-            vec[pos] = vec[pos-1];
+        while (pos > 0 && vec[pos - 1].second > valueToInsert.second)
+        {
+            vec[pos] = vec[pos - 1];
             pos -= 1;
         }
         vec[pos] = valueToInsert;
