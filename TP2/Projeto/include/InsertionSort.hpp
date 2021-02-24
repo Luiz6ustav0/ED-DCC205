@@ -1,17 +1,14 @@
-#include <vector>
 #include <string>
+#include <vector>
 
-void insertionSort(std::vector<std::pair<std::string, int>> &vec)
-{
+void insertionSort(std::vector<std::pair<std::string, int>> &vec) {
     int vecSize = vec.size();
 
-    for (int i = 1; i < vecSize; ++i)
-    {
+    for (int i = 1; i < vecSize; ++i) {
         std::pair<std::string, int> valueToInsert = vec[i];
         int pos = i;
 
-        while (pos > 0 && vec[pos - 1].second < valueToInsert.second)
-        {
+        while (pos > 0 && vec[pos - 1].second < valueToInsert.second) {
             vec[pos] = vec[pos - 1];
             pos -= 1;
         }
