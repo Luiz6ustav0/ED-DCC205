@@ -1,8 +1,9 @@
 #include <string>
 #include <vector>
+#include "siPair.hpp"
 
-void Partition(int left, int right, int &i, int &j, std::vector<std::pair<std::string, int>> &vec) {
-    std::pair<std::string, int> pivot, temp;
+void Partition(int left, int right, int &i, int &j, siPair *vec) {
+    siPair pivot, temp;
     i = left;
     j = right;
     pivot = vec[(i + j) / 2];
@@ -22,7 +23,7 @@ void Partition(int left, int right, int &i, int &j, std::vector<std::pair<std::s
     } while (i <= j);
 }
 
-void order(int left, int right, std::vector<std::pair<std::string, int>> &vec) {
+void order(int left, int right, siPair *vec) {
     int i, j;
     Partition(left, right, i, j, vec);
     if (left < j)
@@ -31,6 +32,6 @@ void order(int left, int right, std::vector<std::pair<std::string, int>> &vec) {
         order(i, right, vec);
 }
 
-void QuickSort(std::vector<std::pair<std::string, int>> &vec) {
-    order(0, vec.size() - 1, vec);
+void QuickSort(siPair *vec, int n) {
+    order(0, n - 1, vec);
 }

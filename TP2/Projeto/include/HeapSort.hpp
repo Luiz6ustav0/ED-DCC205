@@ -1,17 +1,18 @@
+#include "siPair.hpp"
 #include <string>
 #include <vector>
 
-void recreateHeapCondition(int L, int R, std::vector<std::pair<std::string, int>> vec) {
+void recreateHeapCondition(int L, int R, siPair *vec) {
     int i, j;
-    std::pair<std::string, int> item;
+    siPair item;
     i = L;
     j = i * 2;
     item = vec[i];
     while (j <= R) {
         if (j < R)
-            if (vec[j].second < vec[j + 1].second)
+            if (vec[j].second > vec[j + 1].second)
                 j++;
-        if (item.second >= vec[j].second)
+        if (item.second < vec[j].second)
             break;
         vec[i] = vec[j];
         i = j;
@@ -20,23 +21,19 @@ void recreateHeapCondition(int L, int R, std::vector<std::pair<std::string, int>
     vec[i] = item;
 }
 
-void buildHeap(std::vector<std::pair<std::string, int>> vec, int size = -1) {
-    if (size == -1)
-        size = vec.size();
-    int left;
-    left = (size / 2) + 1;
+void buildHeap(siPair *vec, int size) {
+    int left = size / 2 + 1;
     while (left > 1) {
         left--;
         recreateHeapCondition(left, size, vec);
     }
 }
 
-void HeapSort(std::vector<std::pair<std::string, int>> &vec) {
+void HeapSort(siPair *vec, int &n) {
     int left, right;
-    std::pair<std::string, int> tempPair;
-    buildHeap(vec);
-    left = 1;
-    right = vec.size();
+    siPair tempPair;
+    buildHeap(vec, n);
+    left = 1; right = n;
     while (right > 1) {
         tempPair = vec[1];
         vec[1] = vec[right];

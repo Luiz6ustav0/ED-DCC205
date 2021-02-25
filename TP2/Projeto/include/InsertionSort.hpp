@@ -1,11 +1,12 @@
+#include "siPair.hpp"
 #include <string>
 #include <vector>
 
-void insertionSort(std::vector<std::pair<std::string, int>> &vec) {
-    int vecSize = vec.size();
+void insertionSort(siPair *vec, int n) {
+    int vecSize = n;
 
     for (int i = 1; i < vecSize; ++i) {
-        std::pair<std::string, int> valueToInsert = vec[i];
+        siPair valueToInsert = vec[i];
         int pos = i;
 
         while (pos > 0 && vec[pos - 1].second < valueToInsert.second) {
