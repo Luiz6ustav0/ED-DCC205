@@ -1,5 +1,3 @@
-#include <string>
-#include <vector>
 #include "siPair.hpp"
 
 void Partition(int left, int right, int &i, int &j, siPair *vec) {

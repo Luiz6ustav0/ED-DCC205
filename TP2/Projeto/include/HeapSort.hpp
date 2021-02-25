@@ -1,6 +1,4 @@
 #include "siPair.hpp"
-#include <string>
-#include <vector>
 
 void recreateHeapCondition(int L, int R, siPair *vec) {
     int i, j;

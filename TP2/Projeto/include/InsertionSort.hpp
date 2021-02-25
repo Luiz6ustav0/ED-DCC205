@@ -1,6 +1,4 @@
 #include "siPair.hpp"
-#include <string>
-#include <vector>
 
 void insertionSort(siPair *vec, int n) {
     int vecSize = n;
