@@ -3,19 +3,58 @@
 #include "../include/InsertionSort.hpp"
 #include "../include/QuickSort.hpp"
 #include <iostream>
+#include <fstream>
 
 int main(int argc, char *argv[]) {
-    std::vector<std::pair<std::string, int>> myVec;
-    for (int i = 0; i <= 10; ++i) {
-        std::pair<std::string, int> temp(std::to_string(i), i + 3);
-        myVec.push_back(temp);
+    if (!argv[1] || !argv[2]) {
+        std::cout << "Argumentos invalidos" << std::endl;
+        exit(-1);
     }
-    for (auto &i : myVec)
-        std::cout << i.second << " ";
-    std::cout << std::endl;
-    // insertionSort(myVec);
-    // QuickSort(myVec);
-    HeapSort(myVec);
-    for (auto &i : myVec)
-        std::cout << i.second << " ";
+
+    std::string fileName = argv[1], tempPlanetName = "";
+    int linhas = std::stoi(argv[2]), tempHyperjumps = 0;
+
+    std::fstream arqLeitura(fileName);
+    siPair temp;
+
+    /*** Insertion e Quick Sort ***/
+
+    siPair *myVec = new siPair[linhas];
+    
+    for (int i = 0; i < linhas; ++i) {
+        arqLeitura >> tempPlanetName >> tempHyperjumps;
+        temp.first = tempPlanetName;
+        temp.second = tempHyperjumps;
+        myVec[i] = temp;
+    }
+    
+    insertionSort(myVec, linhas);
+    // QuickSort(myVec, linhas);
+
+    /*** *** ***/
+
+    /*** Heapsort ***/
+
+    // temp.first = "First Item";
+    // temp.second = -303;
+    // siPair *myVec = new siPair[linhas + 1];
+    // myVec[0] = temp;
+    // int count = 1;
+    // for (int i = 1; i <= linhas; ++i) {
+    //     arqLeitura >> tempPlanetName >> tempHyperjumps;
+    //     temp.first = tempPlanetName;
+    //     temp.second = tempHyperjumps;
+    //     myVec[count] = temp;
+    //     count++;
+    // }
+
+    // HeapSort(myVec, linhas);
+
+    /*** *** ***/
+
+    if (linhas > 7) linhas = 7;
+    for (int i = 1; i <= linhas; ++i)
+        std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
+
+    delete[] myVec;
 }

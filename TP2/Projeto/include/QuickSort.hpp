@@ -15,7 +15,7 @@ void Partition(int left, int right, int &i, int &j, siPair *vec) {
             vec[i] = vec[j];
             vec[j] = temp;
             i++;
-            j++;
+            j--;
         }
 
     } while (i <= j);
