@@ -23,49 +23,49 @@ int main(int argc, char *argv[]) {
 
     /*** Insertion e Quick Sort ***/
 
-    siPair *myVec = new siPair[linhas];
+    // siPair *myVec = new siPair[linhas];
 
-    for (int i = 0; i < linhas; ++i) {
-        arqLeitura >> tempPlanetName >> tempHyperjumps;
-        temp.first = tempPlanetName;
-        temp.second = tempHyperjumps;
-        myVec[i] = temp;
-    }
+    // for (int i = 0; i < linhas; ++i) {
+    //     arqLeitura >> tempPlanetName >> tempHyperjumps;
+    //     temp.first = tempPlanetName;
+    //     temp.second = tempHyperjumps;
+    //     myVec[i] = temp;
+    // }
 
-    /* ESCOLHA O METODO AQUI */
-    // gnomeSort(myVec, linhas);
-    // insertionSort(myVec, linhas);
-    // QuickSort(myVec, linhas);
-    OptimizedQuickSort(myVec, linhas);
+    // /* ESCOLHA O METODO AQUI */
+    // // gnomeSort(myVec, linhas);
+    // // insertionSort(myVec, linhas);
+    // // QuickSort(myVec, linhas);
+    // // OptimizedQuickSort(myVec, linhas);
 
-    if (linhas > 7)
-        linhas = 7;
-    for (int i = 0; i < linhas; ++i)
-        std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
+    // if (linhas > 7)
+    //     linhas = 7;
+    // for (int i = 0; i < linhas; ++i)
+    //     std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
 
     /*** *** ***/
 
     /*** Heapsort ***/
 
-    // temp.first = "First Item";
-    // temp.second = -303;
-    // siPair *myVec = new siPair[linhas + 1];
-    // myVec[0] = temp;
-    // int count = 1;
-    // for (int i = 1; i <= linhas; ++i) {
-    //     arqLeitura >> tempPlanetName >> tempHyperjumps;
-    //     temp.first = tempPlanetName;
-    //     temp.second = tempHyperjumps;
-    //     myVec[count] = temp;
-    //     count++;
-    // }
+    temp.first = "First Item";
+    temp.second = -303;
+    siPair *myVec = new siPair[linhas + 1];
+    myVec[0] = temp;
+    int count = 1;
+    for (int i = 1; i <= linhas; ++i) {
+        arqLeitura >> tempPlanetName >> tempHyperjumps;
+        temp.first = tempPlanetName;
+        temp.second = tempHyperjumps;
+        myVec[count] = temp;
+        count++;
+    }
 
-    // HeapSort(myVec, linhas);
+    HeapSort(myVec, linhas);
 
-    // if (linhas > 7)
-    //     linhas = 7;
-    // for (int i = 1; i <= linhas; ++i)
-    //     std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
+    if (linhas > 7)
+        linhas = 7;
+    for (int i = 1; i <= linhas; ++i)
+        std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
 
     /*** *** ***/
 
