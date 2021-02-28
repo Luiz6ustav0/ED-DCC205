@@ -1,3 +1,6 @@
+#ifndef INSERT_S_H
+#define INSERT_S_H
+
 #include "siPair.hpp"
 
 void insertionSort(siPair *vec, int n) {
@@ -14,3 +17,5 @@ void insertionSort(siPair *vec, int n) {
         vec[pos] = valueToInsert;
     }
 }
+
+#endif
