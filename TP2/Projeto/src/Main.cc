@@ -1,12 +1,12 @@
 // #include "Test.h"
-#include "../include/GnomeSort.hpp"
+#include <fstream>
+#include <iostream>
+
 #include "../include/HeapSort.hpp"
 #include "../include/InsertionSort.hpp"
 #include "../include/OptimizedQuicksort.hpp"
 #include "../include/QuickSort.hpp"
-
-#include <fstream>
-#include <iostream>
+#include "../include/ShellSort.hpp"
 
 int main(int argc, char *argv[]) {
 
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     std::fstream arqLeitura(fileName);
     siPair temp;
 
-    /*** Insertion e Quick Sort ***/
+    /*** Insertion, Quick Sorts e Gnome Sort ***/
 
     // siPair *myVec = new siPair[linhas];
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
     // }
 
     // /* ESCOLHA O METODO AQUI */
-    // // gnomeSort(myVec, linhas);
+    // // ShellSort(myVec, linhas);
     // // insertionSort(myVec, linhas);
     // // QuickSort(myVec, linhas);
     // // OptimizedQuickSort(myVec, linhas);
