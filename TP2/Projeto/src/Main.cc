@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     std::fstream arqLeitura(fileName);
     siPair temp;
 
-    /*** Insertion, Quick Sorts e Gnome Sort ***/
+    /*** SECAO INSERTION, QUICK E SHELL SORT ***/
 
     // siPair *myVec = new siPair[linhas];
 
@@ -43,9 +43,9 @@ int main(int argc, char *argv[]) {
     // for (int i = 0; i < linhas; ++i)
     //     std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
 
-    /*** *** ***/
+    /*** FIM DA SECAO ***/
 
-    /*** Heapsort ***/
+    /*** SECAO HEAPSORT ***/
 
     temp.first = "First Item";
     temp.second = -303;
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
     for (int i = 1; i <= linhas; ++i)
         std::cout << myVec[i].first << " " << myVec[i].second << std::endl;
 
-    /*** *** ***/
+    /*** FIM DA SECAO ***/
 
     delete[] myVec;
 }
