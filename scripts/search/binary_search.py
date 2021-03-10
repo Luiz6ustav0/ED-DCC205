@@ -21,7 +21,7 @@ class Linear_Table:
             self.__n = len(self.items)
         except TypeError:
             print(
-                "Items must be passed as inside an iterable. e.g: f([1, 2, 3]) and not f(1, 2, 3)"
+                "Items must be passed inside an iterable. e.g: f([1, 2, 3]) and not f(1, 2, 3)"
             )
 
     def sequencial_search(self, x: int) -> int:
@@ -37,7 +37,7 @@ class Linear_Table:
     def binary_search(self, x: int) -> int:
         """
         Since it's not guaranteed I'll have sorted arrays and this is just
-        for practice, I'll sorte the array before running the actual thing
+        for practice, I'll sort the array before running the actual thing
         """
         if self.items[0] == x:
             return 0

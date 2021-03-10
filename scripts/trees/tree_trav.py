@@ -4,10 +4,11 @@ class Node:
         self.left = None
         self.right = None
 
+
 class Tree:
     def __init__(self, r=Node(0)):
         self.root = r
-    
+
     def insert(self, n, r):
         if n.value < r.value:
             if r.left:
@@ -22,12 +23,12 @@ class Tree:
 
     def pre_order(self, r):
         if r is None:
-            pass 
+            pass
         else:
             print(r.value)
             self.pre_order(r.left)
             self.pre_order(r.right)
-    
+
     def in_order(self, r):
         if r is None:
             pass
@@ -35,7 +36,7 @@ class Tree:
             self.in_order(r.left)
             print(r.value)
             self.in_order(r.right)
-    
+
     def post_order(self, r):
         if r is None:
             pass
@@ -56,4 +57,3 @@ class Tree:
                     print(temp.value)
                     q.append(temp.left)
                     q.append(temp.right)
-
