@@ -20,9 +20,17 @@ class BinarySearchTree:
         elif k > sub_tree_root.value:
             return self.__recursive_search(sub_tree_root.right, k)
         else:
-            return sub_tree_root
+            return sub_tree_root  # Item found
 
-    def insert(self, n, r):
+    def __in_order(self, r: Node):
+        if r is None:
+            pass
+        else:
+            self.__in_order(r.left)
+            print(r.value)
+            self.__in_order(r.right)
+
+    def __recursive_insert(self, n: Node, r: Node):
         if n.value < r.value:
             if r.left:
                 self.insert(n, r.left)
@@ -34,13 +42,30 @@ class BinarySearchTree:
             else:
                 r.right = n
 
-    def in_order_traversal(self, r):
-        if r is None:
-            pass
-        else:
-            self.in_order_traversal(r.left)
-            print(r.value)
-            self.in_order_traversal(r.right)
+    def __remove_recursive(self, sub_tree: Node, key: int):
+        pass
+
+    def insert(self, n: Node):
+        self.__recursive_insert(n, self.root)
+
+    def in_order_traversal(self):
+        self.__in_order(self.root)
+    
+    def show(self):
+        self.in_order_traversal()
 
     def search(self, key: int):
         return self.__recursive_search(self.root, key)
+
+    def remove(self, k: int):
+        """
+        Checks if there's a node N with the key k in the tree and
+        removes it.
+        We have 3 cases if the node is present:
+            - No children.
+            - Left XOR Right child. Remove node and bring subtree up
+            - Both children. We need to get either the leftiest descendant
+              from the right subtree or the rightiest descendant of left
+              subtree.
+        """
+        return self.__remove_recursive(self.root, k)
