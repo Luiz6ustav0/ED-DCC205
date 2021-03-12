@@ -51,20 +51,37 @@ class BinarySearchTree:
                 r.right = n
 
     def __remove_recursive(self, sub_tree: Node, key: int):
-        if not sub_tree:
-            print("This tree doesn't contain the item with the key", key)
+        # Base Case
+        if sub_tree is None:
             return sub_tree
+
+        # If the key to be deleted
+        # is smaller than the root's
+        # key then it lies in  left subtree
         if key < sub_tree.value:
-            return self.__remove_recursive(sub_tree.left, key)
+            sub_tree.left = self.__remove_recursive(sub_tree.left, key)
+
+        # If the kye to be delete
+        # is greater than the root's key
+        # then it lies in right subtree
         elif key > sub_tree.value:
-            return self.__remove_recursive(sub_tree.right, key)
+            sub_tree.right = self.__remove_recursive(sub_tree.right, key)
+
+        # If key is same as root's key, then this is the node
+        # to be deleted
         else:
-            if not sub_tree.right:
-                sub_tree = sub_tree.left
-            elif not sub_tree.left:
+            # Node with only one child or no child
+            if sub_tree.left is None:
                 sub_tree = sub_tree.right
+
+            elif sub_tree.right is None:
+                sub_tree = sub_tree.left
+
             else:
-                self.__ancestor(sub_tree, sub_tree.left)
+                sub_tree = self.min_value_node(sub_tree)
+                sub_tree.right = self.__remove_recursive(sub_tree.right, sub_tree.value)
+            
+        return sub_tree
 
     def insert(self, n: Node):
         self.__recursive_insert(n, self.root)
@@ -78,7 +95,7 @@ class BinarySearchTree:
     def search(self, key: int):
         return self.__recursive_search(self.root, key)
 
-    def remove(self, k: int): # NOT WORKING
+    def remove(self, k: int):  # NOT WORKING
         """
         Checks if there's a node N with the key k in the tree and
         removes it.
@@ -90,3 +107,17 @@ class BinarySearchTree:
               subtree.
         """
         return self.__remove_recursive(self.root, k)
+
+    def min_value_node(self, r: Node = None):
+        """
+        Searches for the node with smallest value on subtree if given
+        or uses tree root if not
+        """
+        if r:
+            temp = r
+        else:
+            temp = self.root
+
+        while temp.left:
+            temp = temp.left
+        return temp
