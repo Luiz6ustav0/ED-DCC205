@@ -1,7 +1,6 @@
 #ifndef TRANSLATION_UNIT
 #define TRANSLATION_UNIT
 
-#include <alphabet.hpp>
 #include <string>
 
 class TranslationUnit {
