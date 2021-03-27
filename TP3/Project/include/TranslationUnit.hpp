@@ -1,18 +1,19 @@
 #ifndef TRANSLATION_UNIT
 #define TRANSLATION_UNIT
 
+#include "BinarySearchTree.hpp"
 #include <string>
 
+template <class T>
 class TranslationUnit {
 
     std::string tree_str;
-    char *treevec;
+    BinarySearchTree<T> tree;
 
 public:
-    TranslationUnit(std::string t = "");
-    ~TranslationUnit();
+    TranslationUnit() {};
 
-    void buildTreeFromString(std::string t);
+    void buildTreeFromString(std::string s);
     std::string decodeMessage(std::string s);
     std::string encodeMessage(std::string s);
 };
