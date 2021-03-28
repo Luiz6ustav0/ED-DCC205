@@ -135,7 +135,6 @@ std::string BinarySearchTree<T>::pathOf(char c) {
             currentNode = currentNode->right;
         }
     }
-    std::cout << "PATH FOR: " << c << " IS: " << path.str() << std::endl;
     return path.str();
 }
 
