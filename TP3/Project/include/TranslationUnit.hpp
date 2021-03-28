@@ -9,7 +9,7 @@ class TranslationUnit {
 
     std::string tree_str;
     BinarySearchTree<T> tree;
-    void decodingSearchProcedure(std::stringstream &decodingStream, std::string s);
+    void decodingSearchFromStringProcedure(std::stringstream &decodingStream, std::string s);
 
 public:
     TranslationUnit(){};
@@ -44,11 +44,11 @@ std::string TranslationUnit<T>::decodeMessage(std::string message) {
     while ((pos = message.find(delimiter)) != std::string::npos) {
         str = message.substr(0, pos);
         message.erase(0, pos + 1);
-        this->decodingSearchProcedure(decoded, str);
+        this->decodingSearchFromStringProcedure(decoded, str);
     }
 
     str = message;
-    this->decodingSearchProcedure(decoded, str);
+    this->decodingSearchFromStringProcedure(decoded, str);
 
     return decoded.str();
 }
@@ -64,7 +64,7 @@ T TranslationUnit<T>::searchByPath(int num) {
 }
 
 template <class T>
-void TranslationUnit<T>::decodingSearchProcedure(std::stringstream &decodingStream, std::string s) {
+void TranslationUnit<T>::decodingSearchFromStringProcedure(std::stringstream &decodingStream, std::string s) {
     if (s != "") {
         if (s[0] == '0')
             s[0] = '2'; // when converting to int the char '0' is removed

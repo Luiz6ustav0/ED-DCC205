@@ -32,6 +32,7 @@ public:
     ~BinarySearchTree();
     void insert(T n); // this.recursiveInsert(n, this.root);
     T search(int num);
+    std::string pathOf(char c);
     Node<T> *getRoot() { return this->root; };
 };
 
@@ -116,5 +117,27 @@ T BinarySearchTree<T>::search(int n) {
     }
     return currentNode->getItem();
 }
+
+template <class T>
+std::string BinarySearchTree<T>::pathOf(char c) {
+    std::stringstream path;
+    int searchKey = int(c);
+
+    Node<T> *currentNode = this->root;
+
+    while (currentNode != nullptr) {
+        if (searchKey == currentNode->getKey()) break;
+        if (searchKey < currentNode->getKey()) {
+            path << 'L';
+            currentNode = currentNode->left;
+        } else {
+            path << 'R';
+            currentNode = currentNode->right;
+        }
+    }
+    std::cout << "PATH FOR: " << c << " IS: " << path.str() << std::endl;
+    return path.str();
+}
+
 
 #endif
