@@ -26,13 +26,14 @@ class BinarySearchTree {
     Node<T> *root;
 
     void deleteRecursive(Node<T> *r);
-    void recursiveInsert(Node<T> *n, Node<T> *r);
+    Node<T> *recursiveInsert(Node<T> *n, Node<T> *r);
 
 public:
     BinarySearchTree() : root(nullptr){};
     ~BinarySearchTree();
     void insert(T n); // this.recursiveInsert(n, this.root);
     T search(int num);
+    Node<T> *getRoot() { return this->root; };
 };
 
 /**** DEFINITIONS ****/
@@ -71,27 +72,25 @@ BinarySearchTree<T>::~BinarySearchTree() {
 }
 
 template <class T>
-void BinarySearchTree<T>::recursiveInsert(Node<T> *n, Node<T> *r) {
+Node<T> *BinarySearchTree<T>::recursiveInsert(Node<T> *n, Node<T> *r) {
+    if (r == nullptr)
+        return n;
     if (n->getKey() < r->getKey()) {
-        if (r->left)
-            this->recursiveInsert(n, r->left);
-        else
-            r->setLeft(n);
-    } else {
-        if (r->right)
-            this->recursiveInsert(n, r->right);
-        else
-            r->setRight(n);
+        r->setLeft(this->recursiveInsert(n, r->left));
+    } else if (n->getKey() > r->getKey()) {
+        r->setRight(this->recursiveInsert(n, r->right));
     }
+    return r;
 }
 
 template <class T>
 void BinarySearchTree<T>::insert(T n) {
-    if (this->root) {
+    if (this->root == nullptr)
+        this->root = new Node<T>(n);
+
+    else {
         Node<T> *newNode = new Node<T>(n);
         this->recursiveInsert(newNode, this->root);
-    } else {
-        this->root = new Node<T>(n);
     }
 }
 
@@ -106,17 +105,16 @@ T BinarySearchTree<T>::search(int n) {
 
     Node<T> *currentNode = this->root;
 
-    for (auto &i : digits) {
-        int temp = i - '0';
-        if (temp % 2 == 0) {
-            currentNode = currentNode->right;
-        } else {
-            currentNode = currentNode->left;
+    if (digits.size() >= 1) {
+        for (auto &i : digits) {
+            int temp = i - '0';
+            if (temp % 2 == 0 || temp == 0) {
+                currentNode = currentNode->right;
+            } else {
+                currentNode = currentNode->left;
+            }
         }
     }
-
-    if (currentNode == nullptr)
-        return ' ';
     return currentNode->getItem();
 }
 
