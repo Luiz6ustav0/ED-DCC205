@@ -1,7 +1,6 @@
 #ifndef BST_H
 #define BST_H
 
-#include "alphabet.hpp"
 #include <sstream>
 #include <string>
 
@@ -40,13 +39,13 @@ public:
 
 template <class T>
 Node<T>::Node(char letter) : item(letter), left(nullptr), right(nullptr) {
-    this->key = alphabetMap[letter];
+    this->key = int(letter);
 }
 
 template <class T>
 void Node<T>::setItem(T i) {
     this->item = i;
-    this->key = alphabetMap[i];
+    this->key = int(i);
 }
 
 template <class T>
