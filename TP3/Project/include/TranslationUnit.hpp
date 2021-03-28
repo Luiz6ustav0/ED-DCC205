@@ -13,9 +13,9 @@ class TranslationUnit {
     BinarySearchTree<T> tree;
     void decodingSearchFromStringProcedure(std::stringstream &decodingStream, std::string s);
     int generateRandomNumber(bool even = true);
+    void numberPathFromChar(std::stringstream &encodingStream, char c);
 
-public:
-    TranslationUnit(){};
+        public : TranslationUnit(){};
 
     void buildTreeFromString(std::string s);
     std::string decodeMessage(std::string s);
@@ -62,13 +62,7 @@ std::string TranslationUnit<T>::encodeMessage(std::string message) {
 
     for (auto &letter : message) {
         encoded << 'x';
-        std::string path = this->tree.pathOf(letter);
-        for (auto &pathLetter : path) {
-            if (pathLetter == 'L')
-                encoded << generateRandomNumber(false);
-            else if (pathLetter == 'R')
-                encoded << generateRandomNumber();
-        }
+        numberPathFromChar(encoded, letter);
     }
 
     return encoded.str();
@@ -77,6 +71,17 @@ std::string TranslationUnit<T>::encodeMessage(std::string message) {
 template <class T>
 T TranslationUnit<T>::searchByPath(int num) {
     return this->tree.search(num);
+}
+
+template <class T>
+void TranslationUnit<T>::numberPathFromChar(std::stringstream &encodingStream, char c) {
+    std::string path = this->tree.pathOf(c);
+    for (auto &pathLetter : path) {
+        if (pathLetter == 'L')
+            encodingStream << generateRandomNumber(false);
+        else if (pathLetter == 'R')
+            encodingStream << generateRandomNumber();
+    }
 }
 
 template <class T>
