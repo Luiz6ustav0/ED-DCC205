@@ -1,36 +1,39 @@
-#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 
-#include "../include/BinarySearchTree.hpp"
+#include "../include/TranslationUnit.hpp"
 
 int main(int argc, char *argv[]) {
 
-    BinarySearchTree<char> bst;
-    bst.insert('A');
-    bst.insert('B');
-    std::cout << bst.search() << std::endl; 
-    
-    
-    // std::string fileName = std::string(argv[1]);
+    if (!argv[1]) {
+        std::cout << "Argumentos invalidos" << std::endl;
+        exit(-1);
+    }
 
-    // std::string currentCommand = "";
+    srand(time(NULL));
 
-    // std::fstream f(fileName);
-    // while (f >> currentCommand) {
-    //     if (currentCommand[0] == 'A') {
-    //         // Montar Arvore
+    std::string fileName = std::string(argv[1]);
 
-    //     } else if (currentCommand[0] == 'C') {
-    //         // Codificar entrada
+    TranslationUnit<char> transUnit;
 
-    //     } else if (currentCommand[0] == 'D') {
-    //         // Decodificar entrada
+    std::string commandContent = "";
+    char commandType = ' ';
 
-    //     } else {
-    //         std::cout << "Tipo de Comando INVALIDO" << std::endl;
-    //     }
-    // }
+    std::fstream f(fileName);
+
+    while (std::getline(f, commandContent)) {
+        commandType = commandContent[0];
+        commandContent.erase(0, 3);
+        if (commandType == 'A') {
+            transUnit.buildTreeFromString(commandContent);
+        } else if (commandType == 'C') {
+            std::string encodedMsg = transUnit.encodeMessage(commandContent);
+            std::cout << encodedMsg << std::endl;
+        } else if (commandType == 'D') {
+            std::string decodedMsg = transUnit.decodeMessage(commandContent);
+            std::cout << decodedMsg << std::endl;
+        }
+    }
 }
