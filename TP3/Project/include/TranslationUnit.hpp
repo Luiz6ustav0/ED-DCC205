@@ -15,7 +15,8 @@ class TranslationUnit {
     int generateRandomNumber(bool even = true);
     void numberPathFromChar(std::stringstream &encodingStream, char c);
 
-        public : TranslationUnit(){};
+public:
+    TranslationUnit(){};
 
     void buildTreeFromString(std::string s);
     std::string decodeMessage(std::string s);

@@ -126,7 +126,8 @@ std::string BinarySearchTree<T>::pathOf(char c) {
     Node<T> *currentNode = this->root;
 
     while (currentNode != nullptr) {
-        if (searchKey == currentNode->getKey()) break;
+        if (searchKey == currentNode->getKey())
+            break;
         if (searchKey < currentNode->getKey()) {
             path << 'L';
             currentNode = currentNode->left;
@@ -137,6 +138,5 @@ std::string BinarySearchTree<T>::pathOf(char c) {
     }
     return path.str();
 }
-
 
 #endif
